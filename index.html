@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashraf Ahmed | Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero-section">
+      <nav class="topbar">
+        <a class="brand" href="#">Ashraf Ahmed</a>
+        <div class="nav-links">
+          <a href="#projects">Projects</a>
+          <a href="#tech">Tech</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Software Engineer | ML Systems | Cloud</p>
+          <h1>Build modern distributed systems, intelligent APIs, and scalable ML platforms.</h1>
+          <p class="intro">I create polished engineering portfolios with clean architecture, async backends, Redis queues, containerized deployment, and strong developer-first UX.</p>
+          <div class="cta-group">
+            <a class="btn btn-primary" href="https://github.com/AshrafAhmed9" target="_blank">View GitHub</a>
+            <a class="btn btn-secondary" href="#projects">See Projects</a>
+          </div>
+          <div class="hero-badges">
+            <span>FastAPI</span>
+            <span>Redis</span>
+            <span>PostgreSQL</span>
+            <span>Docker</span>
+          </div>
+        </div>
+
+        <div class="hero-card terminal-card">
+          <div class="terminal-header">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="terminal-title">portfolio@site</span>
+          </div>
+          <div class="terminal-body" id="terminal">
+            <div class="terminal-line"><span class="prompt">$</span> <span id="terminal-text"></span><span class="cursor">|</span></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="projects" class="section projects-section">
+      <h2>Featured Projects</h2>
+      <div class="cards-grid">
+        <article class="project-card">
+          <h3>Scalable ML Inference Platform</h3>
+          <p>A distributed FastAPI + Redis + PostgreSQL system with worker pipelines and async inference.</p>
+          <a class="card-link" href="https://github.com/AshrafAhmed9/-SMTTP" target="_blank">Repository</a>
+        </article>
+        <article class="project-card">
+          <h3>Portfolio Website</h3>
+          <p>A polished GitHub Pages landing page with interactive tech showcase and project links.</p>
+          <a class="card-link" href="https://github.com/AshrafAhmed9/ashrafahmed9.github.io" target="_blank">Repository</a>
+        </article>
+        <article class="project-card">
+          <h3>Cloud Deployment Strategy</h3>
+          <p>Containerized services and scalable deployment plans for AWS / Render using Docker Compose.</p>
+          <a class="card-link" href="https://github.com/AshrafAhmed9" target="_blank">More Work</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="tech" class="section tech-section">
+      <h2>Tech I Use</h2>
+      <p class="section-copy">A polished slideshow that shows the tools and platforms I use to build production-ready systems.</p>
+      <div class="slider-card">
+        <div class="slider-inner" id="tech-slide"></div>
+        <div class="slider-controls">
+          <button id="prevTech">‹</button>
+          <button id="nextTech">›</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+      <div class="contact-copy">
+        <h2>Let's build something impactful.</h2>
+        <p>If you want a strong portfolio, a scalable codebase, or an engineered product that stands out in interviews, I'm ready to collaborate.</p>
+        <div class="contact-links">
+          <a class="btn btn-primary" href="mailto:ashrafahmed1232@gmail.com">Email Me</a>
+          <a class="btn btn-secondary" href="https://github.com/AshrafAhmed9" target="_blank">GitHub Profile</a>
+        </div>
+      </div>
+      <div class="contact-card">
+        <h3>About Me</h3>
+        <p>Ashraf Ahmed — a developer focused on backend systems, ML inference pipelines, and containerized deployments. I turn backend ideas into polished engineering work with strong product signal.</p>
+      </div>
+    </section>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
