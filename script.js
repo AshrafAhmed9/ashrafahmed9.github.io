@@ -48,6 +48,77 @@ function buildLoopingTrack(container, items) {
 buildLoopingTrack(leftMarquee, leftItems);
 buildLoopingTrack(rightMarquee, rightItems);
 
+const leftTracks = leftMarquee.querySelectorAll('.slide-track');
+const rightTracks = rightMarquee.querySelectorAll('.slide-track');
+let leftOffset = 0;
+let rightOffset = 0;
+let leftSpeed = 0.4;
+let rightSpeed = -0.4;
+let leftTouchStart = null;
+let rightTouchStart = null;
+
+function setTrackPosition(tracks, offset) {
+  const length = tracks[0].offsetHeight;
+  tracks[0].style.transform = `translateY(${offset}px)`;
+  tracks[1].style.transform = `translateY(${offset + length}px)`;
+}
+
+function normalizeOffset(offset, length) {
+  if (offset <= -length) return offset + length;
+  if (offset >= 0) return offset - length;
+  return offset;
+}
+
+function handleSwipe(startY, currentY, panel) {
+  const delta = currentY - startY;
+  const speed = delta * 0.15;
+
+  if (panel === 'left') {
+    leftSpeed = speed;
+  } else {
+    rightSpeed = speed;
+  }
+}
+
+function addInteraction(panelElement, panelKey) {
+  let touchStartY = 0;
+  let isTouching = false;
+
+  panelElement.addEventListener('wheel', (event) => {
+    event.preventDefault();
+    const delta = event.deltaY;
+    if (panelKey === 'left') {
+      leftSpeed += delta * 0.02;
+    } else {
+      rightSpeed += delta * 0.02;
+    }
+  }, { passive: false });
+
+  panelElement.addEventListener('touchstart', (event) => {
+    isTouching = true;
+    touchStartY = event.touches[0].clientY;
+  });
+
+  panelElement.addEventListener('touchmove', (event) => {
+    if (!isTouching) return;
+    const currentY = event.touches[0].clientY;
+    const delta = currentY - touchStartY;
+    if (panelKey === 'left') {
+      leftSpeed = delta * 0.18;
+    } else {
+      rightSpeed = delta * 0.18;
+    }
+    touchStartY = currentY;
+  }, { passive: false });
+
+  panelElement.addEventListener('touchend', () => {
+    isTouching = false;
+  });
+}
+
+addInteraction(leftMarquee, 'left');
+addInteraction(rightMarquee, 'right');
+
 let cursorActiveTimeout;
 document.addEventListener('mousemove', (event) => {
   const { clientX, clientY } = event;
@@ -62,6 +133,24 @@ document.addEventListener('mousemove', (event) => {
     cursorHighlight.style.transform = 'translate(-50%, -50%) scale(0.8)';
   }, 320);
 });
+
+function animateTracks() {
+  if (leftTracks.length) {
+    const length = leftTracks[0].offsetHeight;
+    leftOffset = normalizeOffset(leftOffset + leftSpeed, length);
+    setTrackPosition(leftTracks, leftOffset);
+    leftSpeed *= 0.96;
+  }
+  if (rightTracks.length) {
+    const length = rightTracks[0].offsetHeight;
+    rightOffset = normalizeOffset(rightOffset + rightSpeed, length);
+    setTrackPosition(rightTracks, rightOffset);
+    rightSpeed *= 0.96;
+  }
+  requestAnimationFrame(animateTracks);
+}
+
+animateTracks();
 
 const canvas = document.getElementById('gravity-canvas');
 const ctx = canvas.getContext('2d');

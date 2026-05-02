@@ -151,7 +151,7 @@ body {
   align-items: stretch;
   gap: 18px;
   z-index: 1;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 .left-panel {
@@ -180,6 +180,12 @@ body {
   border-radius: 30px;
   border: 1px solid rgba(255,255,255,0.16);
   background: rgba(255,255,255,0.12);
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.marquee:active {
+  cursor: grabbing;
 }
 
 .slide-track {
@@ -187,11 +193,6 @@ body {
   flex-direction: column;
   gap: 16px;
   padding: 18px;
-  animation: scroll-up 22s linear infinite;
-}
-
-.right-panel .slide-track {
-  animation-direction: reverse;
 }
 
 .slide {
