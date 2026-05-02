@@ -1,68 +1,115 @@
-const terminalText = document.getElementById('terminal-text');
-const commands = [
-  '$ whoami  ',
-  'Ashraf Ahmed — ML Systems Engineer',
-  '$ open repo  ',
-  'https://github.com/AshrafAhmed9/-SMTTP',
-  '$ show tech  ',
-  'FastAPI, Redis, PostgreSQL, Docker, PyTorch, Transformers',
-  '$ deploy  ',
-  'Deploy with GitHub Pages for free at asharfahmed9.github.io'
+const skillsList = [
+  '🐍 Python — Versatile language for backend and ML',
+  '☕ Java — Object-oriented programming and enterprise apps',
+  '⚡ FastAPI — High-performance async web APIs',
+  '🔄 REST APIs — Scalable web service design',
+  '🟦 PostgreSQL — Robust relational database',
+  '🔴 Redis — In-memory data store for caching and queues',
+  '🏗️ Distributed Systems — Scalable architectures',
+  '📋 Task Queues — Asynchronous job processing',
+  '💾 Caching — Performance optimization',
+  '🚦 Rate Limiting — System stability',
+  '🐳 Docker — Containerized deployments',
+  '📚 Git — Version control and collaboration',
+  '☁️ AWS EC2 — Cloud infrastructure',
+  '🧠 DSA — Algorithms and data structures',
+  '🏛️ System Design — Scalable software architecture'
 ];
-let idx = 0;
-let char = 0;
-let currentText = '';
+let skillIndex = 0;
+const skillSlide = document.getElementById('skills-slide');
+const prevSkill = document.getElementById('prevSkill');
+const nextSkill = document.getElementById('nextSkill');
 
-function typeCommand() {
-  if (idx >= commands.length) {
-    idx = 0;
+function showSkill(index) {
+  skillSlide.innerHTML = `<div class="skill-item">${skillsList[index]}</div>`;
+}
+
+function nextSkillItem() {
+  skillIndex = (skillIndex + 1) % skillsList.length;
+  showSkill(skillIndex);
+}
+
+function prevSkillItem() {
+  skillIndex = (skillIndex - 1 + skillsList.length) % skillsList.length;
+  showSkill(skillIndex);
+}
+
+prevSkill.addEventListener('click', prevSkillItem);
+nextSkill.addEventListener('click', nextSkillItem);
+showSkill(0);
+setInterval(nextSkillItem, 3000);
+
+// Gravity effect
+const canvas = document.getElementById('gravity-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+const particleCount = 50;
+
+class Particle {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.size = Math.random() * 3 + 1;
+    this.speedX = Math.random() * 2 - 1;
+    this.speedY = Math.random() * 2 - 1;
+    this.color = `rgba(${Math.random() * 100 + 155}, ${Math.random() * 100 + 155}, 255, 0.7)`;
   }
-  const line = commands[idx];
-  if (char < line.length) {
-    currentText += line[char];
-    terminalText.textContent = currentText;
-    char += 1;
-    setTimeout(typeCommand, 70);
-  } else {
-    setTimeout(() => {
-      currentText = '';
-      char = 0;
-      idx += 1;
-      typeCommand();
-    }, 1400);
+
+  update(mouseX, mouseY) {
+    const dx = mouseX - this.x;
+    const dy = mouseY - this.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    const force = (100 - distance) / 100;
+    if (distance < 100) {
+      this.speedX += dx * force * 0.01;
+      this.speedY += dy * force * 0.01;
+    }
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.speedX *= 0.99;
+    this.speedY *= 0.99;
+  }
+
+  draw() {
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
   }
 }
 
-typeCommand();
-
-const techList = [
-  'FastAPI — API design, async request handling, validation',
-  'Redis — queues, caching, pub/sub, realtime state',
-  'PostgreSQL — reliable relational data stores, SQLAlchemy ORM',
-  'Docker — containerized deployment, local reproducibility',
-  'PyTorch & Transformers — ML inference and NLP model pipelines',
-  'GitHub Pages — free static hosting for polished portfolio sites'
-];
-let techIndex = 0;
-const techSlide = document.getElementById('tech-slide');
-const prevTech = document.getElementById('prevTech');
-const nextTech = document.getElementById('nextTech');
-
-function showTech(index) {
-  techSlide.innerHTML = `<div class="tech-item">${techList[index]}</div>`;
+function initParticles() {
+  particles = [];
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+  }
 }
 
-function nextItem() {
-  techIndex = (techIndex + 1) % techList.length;
-  showTech(techIndex);
+let mouseX = canvas.width / 2;
+let mouseY = canvas.height / 2;
+
+canvas.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(particle => {
+    particle.update(mouseX, mouseY);
+    particle.draw();
+  });
+  requestAnimationFrame(animate);
 }
 
-function prevItem() {
-  techIndex = (techIndex - 1 + techList.length) % techList.length;
-  showTech(techIndex);
-}
+initParticles();
+animate();
 
-prevTech.addEventListener('click', prevItem);
-nextTech.addEventListener('click', nextItem);
-showTech(0);
-setInterval(nextItem, 4200);
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  initParticles();
+});

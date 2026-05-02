@@ -12,91 +12,112 @@
       <nav class="topbar">
         <a class="brand" href="#">Ashraf Ahmed</a>
         <div class="nav-links">
+          <a href="#about">About</a>
           <a href="#projects">Projects</a>
-          <a href="#tech">Tech</a>
+          <a href="#skills">Skills</a>
           <a href="#contact">Contact</a>
         </div>
       </nav>
 
       <div class="hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Software Engineer | ML Systems | Cloud</p>
-          <h1>Build modern distributed systems, intelligent APIs, and scalable ML platforms.</h1>
-          <p class="intro">I create polished engineering portfolios with clean architecture, async backends, Redis queues, containerized deployment, and strong developer-first UX.</p>
-          <div class="cta-group">
-            <a class="btn btn-primary" href="https://github.com/AshrafAhmed9" target="_blank">View GitHub</a>
-            <a class="btn btn-secondary" href="#projects">See Projects</a>
+          <h1>Ashraf Ahmed</h1>
+          <p class="subtitle">Backend Systems Engineer</p>
+          <p class="intro">Building scalable distributed systems with FastAPI, Redis, and PostgreSQL. Focused on high-performance APIs, task queues, and cloud deployments.</p>
+          <div class="contact-info">
+            <p><strong>Email:</strong> ashrafahmed1232@gmail.com</p>
+            <p><strong>Mobile:</strong> +91-9901916318</p>
           </div>
-          <div class="hero-badges">
-            <span>FastAPI</span>
-            <span>Redis</span>
-            <span>PostgreSQL</span>
-            <span>Docker</span>
+          <div class="social-links">
+            <a href="#" class="social-link">GitHub</a>
+            <a href="#" class="social-link">LinkedIn</a>
+            <a href="#" class="social-link">LeetCode</a>
+            <a href="#" class="social-link">Resume</a>
           </div>
         </div>
 
-        <div class="hero-card terminal-card">
-          <div class="terminal-header">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-            <span class="terminal-title">portfolio@site</span>
-          </div>
-          <div class="terminal-body" id="terminal">
-            <div class="terminal-line"><span class="prompt">$</span> <span id="terminal-text"></span><span class="cursor">|</span></div>
-          </div>
+        <div class="hero-card education-card">
+          <h3>Education</h3>
+          <p><strong>New Horizon College of Engineering</strong><br>
+          Bachelor of Technology - Computer Science and Engineering<br>
+          Nov. 2022 - June 2026 (Expected)<br>
+          GPA: 7.65</p>
+          <p><strong>Key Courses:</strong> Data Structures & Algorithms, Operating Systems, Computer Networks, Big Data, Cloud Computing, Database Systems, OOP, Engineering Mathematics, Design Thinking</p>
         </div>
       </div>
     </header>
 
+    <section id="about" class="section about-section">
+      <h2>About</h2>
+      <div class="about-grid">
+        <div class="skills-summary">
+          <h3>Skills Summary</h3>
+          <ul>
+            <li><strong>Languages:</strong> Python, Java</li>
+            <li><strong>Backend:</strong> FastAPI, REST APIs, Asynchronous Processing</li>
+            <li><strong>Databases:</strong> PostgreSQL, Redis</li>
+            <li><strong>Systems:</strong> Distributed Systems, Task Queues, Caching, Rate Limiting</li>
+            <li><strong>Tools:</strong> Docker, Git, AWS EC2</li>
+            <li><strong>Core:</strong> Data Structures & Algorithms, System Design Fundamentals</li>
+          </ul>
+        </div>
+        <div class="honors">
+          <h3>Honors</h3>
+          <p>LeetCode Achievements</p>
+        </div>
+      </div>
+    </section>
+
     <section id="projects" class="section projects-section">
-      <h2>Featured Projects</h2>
-      <div class="cards-grid">
+      <h2>Projects</h2>
+      <div class="projects-grid">
         <article class="project-card">
-          <h3>Scalable ML Inference Platform</h3>
-          <p>A distributed FastAPI + Redis + PostgreSQL system with worker pipelines and async inference.</p>
+          <h3>Scalable ML Inference & Task Processing Platform</h3>
+          <p>Distributed ML inference system using FastAPI, Redis, and PostgreSQL with asynchronous processing, queue-based decoupling, worker pipelines, caching, rate limiting, and load testing.</p>
           <a class="card-link" href="https://github.com/AshrafAhmed9/-SMTTP" target="_blank">Repository</a>
         </article>
         <article class="project-card">
-          <h3>Portfolio Website</h3>
-          <p>A polished GitHub Pages landing page with interactive tech showcase and project links.</p>
-          <a class="card-link" href="https://github.com/AshrafAhmed9/ashrafahmed9.github.io" target="_blank">Repository</a>
+          <h3>Distributed Task Queue System (Mini Celery Clone)</h3>
+          <p>Python and Redis-based task processing system with producer-consumer architecture, job queuing, worker orchestration, and retry mechanisms.</p>
+          <a class="card-link" href="#" target="_blank">Repository</a>
         </article>
         <article class="project-card">
-          <h3>Cloud Deployment Strategy</h3>
-          <p>Containerized services and scalable deployment plans for AWS / Render using Docker Compose.</p>
-          <a class="card-link" href="https://github.com/AshrafAhmed9" target="_blank">More Work</a>
+          <h3>Lightweight Radar–Camera Fusion System (RAMP-CNN + YOLO)</h3>
+          <p>Multi-modal deep learning system combining RAMP-CNN with YOLO for object detection, optimized with CUDA acceleration.</p>
+          <a class="card-link" href="#" target="_blank">Repository</a>
+        </article>
+        <article class="project-card">
+          <h3>Face Recognition Attendance System</h3>
+          <p>Real-time face recognition pipeline using Python and OpenCV with backend database integration.</p>
+          <a class="card-link" href="#" target="_blank">Repository</a>
         </article>
       </div>
     </section>
 
-    <section id="tech" class="section tech-section">
-      <h2>Tech I Use</h2>
-      <p class="section-copy">A polished slideshow that shows the tools and platforms I use to build production-ready systems.</p>
-      <div class="slider-card">
-        <div class="slider-inner" id="tech-slide"></div>
-        <div class="slider-controls">
-          <button id="prevTech">‹</button>
-          <button id="nextTech">›</button>
+    <section id="skills" class="section skills-section">
+      <h2>Tech Stack & Skills</h2>
+      <div class="skills-slideshow">
+        <div class="skills-inner" id="skills-slide"></div>
+        <div class="skills-controls">
+          <button id="prevSkill">‹</button>
+          <button id="nextSkill">›</button>
         </div>
       </div>
     </section>
 
     <section id="contact" class="section contact-section">
       <div class="contact-copy">
-        <h2>Let's build something impactful.</h2>
-        <p>If you want a strong portfolio, a scalable codebase, or an engineered product that stands out in interviews, I'm ready to collaborate.</p>
+        <h2>Let's Connect</h2>
+        <p>Interested in backend systems, distributed architectures, or ML pipelines? Reach out to discuss opportunities.</p>
         <div class="contact-links">
           <a class="btn btn-primary" href="mailto:ashrafahmed1232@gmail.com">Email Me</a>
-          <a class="btn btn-secondary" href="https://github.com/AshrafAhmed9" target="_blank">GitHub Profile</a>
+          <a class="btn btn-secondary" href="#" target="_blank">LinkedIn</a>
         </div>
-      </div>
-      <div class="contact-card">
-        <h3>About Me</h3>
-        <p>Ashraf Ahmed — a developer focused on backend systems, ML inference pipelines, and containerized deployments. I turn backend ideas into polished engineering work with strong product signal.</p>
       </div>
     </section>
   </div>
+
+  <canvas id="gravity-canvas"></canvas>
   <script src="script.js"></script>
 </body>
 </html>
