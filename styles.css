@@ -253,8 +253,8 @@ body {
 }
 
 @media (max-width: 1000px) {
-  .left-slideshow,
-  .right-slideshow {
+  .left-panel,
+  .right-panel {
     display: none;
   }
   .repos {
