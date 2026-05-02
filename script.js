@@ -1,78 +1,123 @@
-// Slideshow for sides
+const leftItems = [
+  { icon: '🐍', label: 'Python' },
+  { icon: '⚡', label: 'FastAPI' },
+  { icon: '🔴', label: 'Redis' },
+  { icon: '🐳', label: 'Docker' },
+  { icon: '🟦', label: 'PostgreSQL' },
+  { icon: '📚', label: 'Git' },
+  { icon: '☁️', label: 'AWS EC2' }
+];
+
+const rightItems = [
+  { icon: '☕', label: 'Java' },
+  { icon: '🔄', label: 'REST APIs' },
+  { icon: '🏗️', label: 'Distributed Systems' },
+  { icon: '📋', label: 'Task Queues' },
+  { icon: '💾', label: 'Caching' },
+  { icon: '🚦', label: 'Rate Limiting' },
+  { icon: '🧠', label: 'DSA' },
+  { icon: '🏛️', label: 'System Design' }
+];
+
 const leftSlideshow = document.getElementById('left-slideshow');
 const rightSlideshow = document.getElementById('right-slideshow');
-const leftSlides = leftSlideshow.querySelectorAll('.slide');
-const rightSlides = rightSlideshow.querySelectorAll('.slide');
-let currentSlide = 0;
+const cursorHighlight = document.getElementById('cursor-highlight');
 
-function showSlide() {
-  leftSlides.forEach((slide, i) => {
-    slide.classList.toggle('active', i === currentSlide);
-  });
-  rightSlides.forEach((slide, i) => {
-    slide.classList.toggle('active', i === currentSlide);
-  });
-  currentSlide = (currentSlide + 1) % leftSlides.length;
+function createSlide(item) {
+  const slide = document.createElement('div');
+  slide.className = 'slide';
+  slide.innerHTML = `<span class="icon">${item.icon}</span><span class="label">${item.label}</span>`;
+  return slide;
 }
 
-setInterval(showSlide, 2000);
-showSlide();
+leftItems.forEach(item => leftSlideshow.appendChild(createSlide(item)));
+rightItems.forEach(item => rightSlideshow.appendChild(createSlide(item)));
 
-// Scroll with cursor
-document.addEventListener('mousemove', (e) => {
-  const y = e.clientY;
-  const translateY = (y - window.innerHeight / 2) * 0.3;
-  leftSlideshow.style.transform = `translateY(${translateY}px)`;
-  rightSlideshow.style.transform = `translateY(${translateY}px)`;
+const leftSlides = leftSlideshow.querySelectorAll('.slide');
+const rightSlides = rightSlideshow.querySelectorAll('.slide');
+let leftIndex = 0;
+let rightIndex = 0;
+
+function updateSlides() {
+  leftSlides.forEach((slide, idx) => slide.classList.toggle('active', idx === leftIndex));
+  rightSlides.forEach((slide, idx) => slide.classList.toggle('active', idx === rightIndex));
+
+  leftIndex = (leftIndex + 1) % leftSlides.length;
+  rightIndex = (rightIndex + 1) % rightSlides.length;
+}
+
+updateSlides();
+setInterval(updateSlides, 3000);
+
+let cursorActiveTimeout;
+document.addEventListener('mousemove', (event) => {
+  const { clientX, clientY } = event;
+  cursorHighlight.style.left = `${clientX}px`;
+  cursorHighlight.style.top = `${clientY}px`;
+  cursorHighlight.style.opacity = '1';
+  cursorHighlight.style.transform = 'translate(-50%, -50%) scale(1)';
+
+  clearTimeout(cursorActiveTimeout);
+  cursorActiveTimeout = setTimeout(() => {
+    cursorHighlight.style.opacity = '0';
+    cursorHighlight.style.transform = 'translate(-50%, -50%) scale(0.7)';
+  }, 120);
 });
 
-// Gravity effect like over water
+// Gravity effect like water
 const canvas = document.getElementById('gravity-canvas');
 const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
 
 let particles = [];
-const particleCount = 50;
+const particleCount = 60;
 
 class Particle {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.size = Math.random() * 3 + 1;
-    this.speedX = Math.random() * 2 - 1;
-    this.speedY = Math.random() * 2 - 1;
-    this.color = `rgba(${Math.random() * 100 + 155}, ${Math.random() * 100 + 155}, 255, 0.7)`;
+    this.radius = Math.random() * 2 + 1;
+    this.vx = Math.random() * 1.2 - 0.6;
+    this.vy = Math.random() * 1.2 - 0.6;
+    this.alpha = Math.random() * 0.5 + 0.15;
   }
 
   update(mouseX, mouseY) {
-    // Gravity down
-    this.speedY += 0.05;
     const dx = mouseX - this.x;
     const dy = mouseY - this.y;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-    const force = (100 - distance) / 100;
-    if (distance < 100) {
-      // Repel from cursor, like pushing water
-      this.speedX -= dx * force * 0.02;
-      this.speedY -= dy * force * 0.02;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 120) {
+      const push = (120 - dist) / 120;
+      this.vx -= dx * 0.001 * push;
+      this.vy -= dy * 0.001 * push;
     }
-    this.x += this.speedX;
-    this.y += this.speedY;
-    this.speedX *= 0.99;
-    this.speedY *= 0.99;
 
-    // Reset if out of bounds
-    if (this.y > canvas.height) {
-      this.y = 0;
-      this.speedY = 0;
+    this.vy += 0.01;
+    this.x += this.vx;
+    this.y += this.vy;
+    this.vx *= 0.98;
+    this.vy *= 0.98;
+
+    if (this.y > canvas.height + 20) {
+      this.y = -10;
+      this.x = Math.random() * canvas.width;
+      this.vy = Math.random() * 0.5 + 0.2;
+    }
+    if (this.x < -20 || this.x > canvas.width + 20) {
+      this.x = Math.random() * canvas.width;
     }
   }
 
   draw() {
-    ctx.fillStyle = this.color;
+    ctx.fillStyle = `rgba(180, 230, 255, ${this.alpha})`;
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
     ctx.fill();
   }
 }
@@ -84,17 +129,17 @@ function initParticles() {
   }
 }
 
-let mouseX = canvas.width / 2;
-let mouseY = canvas.height / 2;
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
 
-canvas.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
+window.addEventListener('mousemove', (event) => {
+  mouseX = event.clientX;
+  mouseY = event.clientY;
 });
 
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach(particle => {
+  particles.forEach((particle) => {
     particle.update(mouseX, mouseY);
     particle.draw();
   });
@@ -103,9 +148,7 @@ function animate() {
 
 initParticles();
 animate();
-
 window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  resizeCanvas();
   initParticles();
 });

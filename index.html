@@ -7,27 +7,11 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="left-slideshow" id="left-slideshow">
-    <div class="slide">🐍<br>Python</div>
-    <div class="slide">☕<br>Java</div>
-    <div class="slide">⚡<br>FastAPI</div>
-    <div class="slide">🔄<br>REST APIs</div>
-    <div class="slide">🟦<br>PostgreSQL</div>
-    <div class="slide">🔴<br>Redis</div>
-    <div class="slide">🏗️<br>Distributed Systems</div>
-    <div class="slide">📋<br>Task Queues</div>
-    <div class="slide">💾<br>Caching</div>
-    <div class="slide">🚦<br>Rate Limiting</div>
-    <div class="slide">🐳<br>Docker</div>
-    <div class="slide">📚<br>Git</div>
-    <div class="slide">☁️<br>AWS EC2</div>
-    <div class="slide">🧠<br>DSA</div>
-    <div class="slide">🏛️<br>System Design</div>
-  </div>
+  <div class="left-slideshow" id="left-slideshow"></div>
 
   <div class="center">
     <h1>Ashraf Ahmed</h1>
-    <p>ashrafahmed1232@gmail.com</p>
+    <p class="email">ashrafahmed1232@gmail.com</p>
     <div class="social-links">
       <a href="#" class="social-link">GitHub</a>
       <a href="#" class="social-link">LinkedIn</a>
@@ -36,46 +20,30 @@
     </div>
     <div class="repos">
       <div class="repo-block">
-        <h3>Scalable ML Inference & Task Processing Platform</h3>
-        <p>Distributed ML inference system using FastAPI, Redis, and PostgreSQL.</p>
+        <h3>Scalable ML Inference Platform</h3>
+        <p>FastAPI, Redis, PostgreSQL backend for production inference.</p>
         <a href="https://github.com/AshrafAhmed9/-SMTTP" target="_blank">Repository</a>
       </div>
       <div class="repo-block">
         <h3>Distributed Task Queue System</h3>
-        <p>Python and Redis-based task processing system.</p>
+        <p>Python and Redis job orchestration with retry logic.</p>
         <a href="#" target="_blank">Repository</a>
       </div>
       <div class="repo-block">
         <h3>Radar–Camera Fusion System</h3>
-        <p>Multi-modal deep learning system with RAMP-CNN and YOLO.</p>
+        <p>RAMP-CNN + YOLO fusion for high-speed perception.</p>
         <a href="#" target="_blank">Repository</a>
       </div>
       <div class="repo-block">
-        <h3>Face Recognition Attendance System</h3>
-        <p>Real-time face recognition pipeline with OpenCV.</p>
+        <h3>Face Recognition Attendance</h3>
+        <p>OpenCV pipeline with real-time backend tracking.</p>
         <a href="#" target="_blank">Repository</a>
       </div>
     </div>
   </div>
 
-  <div class="right-slideshow" id="right-slideshow">
-    <div class="slide">🐍<br>Python</div>
-    <div class="slide">☕<br>Java</div>
-    <div class="slide">⚡<br>FastAPI</div>
-    <div class="slide">🔄<br>REST APIs</div>
-    <div class="slide">🟦<br>PostgreSQL</div>
-    <div class="slide">🔴<br>Redis</div>
-    <div class="slide">🏗️<br>Distributed Systems</div>
-    <div class="slide">📋<br>Task Queues</div>
-    <div class="slide">💾<br>Caching</div>
-    <div class="slide">🚦<br>Rate Limiting</div>
-    <div class="slide">🐳<br>Docker</div>
-    <div class="slide">📚<br>Git</div>
-    <div class="slide">☁️<br>AWS EC2</div>
-    <div class="slide">🧠<br>DSA</div>
-    <div class="slide">🏛️<br>System Design</div>
-  </div>
-
+  <div class="right-slideshow" id="right-slideshow"></div>
+  <div id="cursor-highlight"></div>
   <canvas id="gravity-canvas"></canvas>
   <script src="script.js"></script>
 </body>
