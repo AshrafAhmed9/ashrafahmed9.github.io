@@ -134,50 +134,70 @@ body {
   font-weight: 700;
 }
 
-.left-slideshow, .right-slideshow {
+.side-panel {
   position: fixed;
   top: 50%;
-  width: 220px;
+  width: 240px;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 18px;
   z-index: 1;
   pointer-events: none;
-  animation: float 16s ease-in-out infinite alternate;
 }
 
-.left-slideshow {
+.left-panel {
   left: 20px;
 }
 
-.right-slideshow {
+.right-panel {
   right: 20px;
-  animation-delay: 2s;
+}
+
+.side-title {
+  text-align: left;
+  padding: 14px 18px;
+  font-size: 0.82rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.68);
+  border-radius: 24px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.marquee {
+  overflow: hidden;
+  height: 420px;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.12);
+}
+
+.slide-track {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 18px;
+  animation: scroll-up 22s linear infinite;
+}
+
+.right-panel .slide-track {
+  animation-direction: reverse;
 }
 
 .slide {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   width: 100%;
-  padding: 18px 18px;
-  border-radius: 26px;
-  background: rgba(255,255,255,0.22);
-  border: 1px solid rgba(255,255,255,0.28);
+  padding: 16px 14px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.22);
   color: #eff8ff;
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
   box-shadow: 0 18px 40px rgba(0,0,0,0.2);
-}
-
-.slide.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@keyframes float {
-  from { transform: translateY(-48%) translateX(0); }
-  to { transform: translateY(-52%) translateX(0); }
 }
 
 .slide .icon {
@@ -186,10 +206,14 @@ body {
 
 .slide .label {
   display: block;
-  margin-top: 12px;
   font-size: 1rem;
   letter-spacing: 0.01em;
-  color: rgba(255,255,255,0.92);
+  color: rgba(255,255,255,0.94);
+}
+
+@keyframes scroll-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
 }
 
 #cursor-highlight {

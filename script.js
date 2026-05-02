@@ -19,8 +19,8 @@ const rightItems = [
   { icon: '🏛️', label: 'System Design' }
 ];
 
-const leftSlideshow = document.getElementById('left-slideshow');
-const rightSlideshow = document.getElementById('right-slideshow');
+const leftMarquee = document.getElementById('left-marquee');
+const rightMarquee = document.getElementById('right-marquee');
 const cursorHighlight = document.getElementById('cursor-highlight');
 
 function createSlide(item) {
@@ -30,24 +30,23 @@ function createSlide(item) {
   return slide;
 }
 
-leftItems.forEach(item => leftSlideshow.appendChild(createSlide(item)));
-rightItems.forEach(item => rightSlideshow.appendChild(createSlide(item)));
+function buildLoopingTrack(container, items) {
+  const trackA = document.createElement('div');
+  trackA.className = 'slide-track';
+  const trackB = document.createElement('div');
+  trackB.className = 'slide-track';
 
-const leftSlides = leftSlideshow.querySelectorAll('.slide');
-const rightSlides = rightSlideshow.querySelectorAll('.slide');
-let leftIndex = 0;
-let rightIndex = 0;
+  items.forEach(item => {
+    trackA.appendChild(createSlide(item));
+    trackB.appendChild(createSlide(item));
+  });
 
-function updateSlides() {
-  leftSlides.forEach((slide, idx) => slide.classList.toggle('active', idx === leftIndex));
-  rightSlides.forEach((slide, idx) => slide.classList.toggle('active', idx === rightIndex));
-
-  leftIndex = (leftIndex + 1) % leftSlides.length;
-  rightIndex = (rightIndex + 1) % rightSlides.length;
+  container.appendChild(trackA);
+  container.appendChild(trackB);
 }
 
-updateSlides();
-setInterval(updateSlides, 2800);
+buildLoopingTrack(leftMarquee, leftItems);
+buildLoopingTrack(rightMarquee, rightItems);
 
 let cursorActiveTimeout;
 document.addEventListener('mousemove', (event) => {
