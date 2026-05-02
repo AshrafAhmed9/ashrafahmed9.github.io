@@ -46,6 +46,7 @@ body {
   line-height: 1.5;
   min-height: 100vh;
   display: flex;
+  flex-direction: column; 
   justify-content: center;
   align-items: center;
   padding: 40px 20px;
@@ -251,47 +252,65 @@ body {
   pointer-events: none;
   z-index: 0;
 }
-
 @media (max-width: 1000px) {
-  .left-panel,
-  .right-panel {
-    left: 50%;
-    right: auto;
-    width: min(92%, 420px);
-    transform: translateX(-50%);
-    position: fixed;
-    max-width: 92%;
-    box-shadow: 0 16px 60px rgba(0,0,0,0.28);
-  }
-
-  .left-panel {
-    top: 16px;
-  }
-
-  .right-panel {
-    bottom: 16px;
-  }
-
-  .marquee {
-    height: 170px;
-  }
 
   body {
-    padding: 220px 16px 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
   }
 
+  /* REMOVE floating behavior */
+  .side-panel {
+    position: static;
+    transform: none;
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  /* Top banner */
+  .left-panel {
+    order: 1;
+  }
+
+  /* Center content */
+  .center {
+    order: 2;
+    width: 100%;
+  }
+
+  /* Bottom banner */
+  .right-panel {
+    order: 3;
+  }
+
+  /* Horizontal scrolling */
+  .marquee {
+    height: auto;
+  }
+  .marquee .slide-track:nth-child(2) {
+  display: none;
+}
+
+  .slide-track {
+  flex-direction: row;
+  white-space: nowrap;
+}
+
+.slide {
+  min-width: 120px;   /* prevents stacking */
+}
+
+  /* Fix repo layout */
   .repos {
     grid-template-columns: 1fr;
-  }
-
-  .center {
-    padding: 32px 24px;
   }
 }
 
 @media (max-width: 680px) {
   body {
-    padding: 200px 14px 200px;
+    padding: 40px 16px;
   }
 
   .center h1 {

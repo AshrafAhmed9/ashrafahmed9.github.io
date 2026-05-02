@@ -55,10 +55,16 @@ let rightOffset = 0;
 let leftSpeed = 1.2;
 let rightSpeed = -1.2;
 
-function setTrackPosition(tracks, offset) {
-  const length = tracks[0].offsetHeight;
-  tracks[0].style.transform = `translateY(${offset}px)`;
-  tracks[1].style.transform = `translateY(${offset + length}px)`;
+function setTrackPosition(tracks, offset, isMobile) {
+  if (isMobile) {
+    const length = tracks[0].offsetWidth;
+    tracks[0].style.transform = `translateX(${offset}px)`;
+    tracks[1].style.transform = `translateX(${offset + length}px)`;
+  } else {
+    const length = tracks[0].offsetHeight;
+    tracks[0].style.transform = `translateY(${offset}px)`;
+    tracks[1].style.transform = `translateY(${offset + length}px)`;
+  }
 }
 
 function normalizeOffset(offset, length) {
@@ -149,18 +155,26 @@ document.addEventListener('mousemove', (event) => {
 });
 
 function animateTracks() {
+  const isMobile = window.innerWidth <= 1000;
+
   if (leftTracks.length) {
-    const length = leftTracks[0].offsetHeight;
+    const length = isMobile
+      ? leftTracks[0].offsetWidth
+      : leftTracks[0].offsetHeight;
+
     leftOffset = normalizeOffset(leftOffset + leftSpeed, length);
-    setTrackPosition(leftTracks, leftOffset);
-    leftSpeed = leftSpeed * 0.95 + (leftSpeed > 0 ? 0.02 : -0.02);
+    setTrackPosition(leftTracks, leftOffset, isMobile);
   }
+
   if (rightTracks.length) {
-    const length = rightTracks[0].offsetHeight;
+    const length = isMobile
+      ? rightTracks[0].offsetWidth
+      : rightTracks[0].offsetHeight;
+
     rightOffset = normalizeOffset(rightOffset + rightSpeed, length);
-    setTrackPosition(rightTracks, rightOffset);
-    rightSpeed = rightSpeed * 0.95 + (rightSpeed > 0 ? 0.02 : -0.02);
+    setTrackPosition(rightTracks, rightOffset, isMobile);
   }
+
   requestAnimationFrame(animateTracks);
 }
 
