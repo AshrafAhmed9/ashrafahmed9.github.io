@@ -52,10 +52,8 @@ const leftTracks = leftMarquee.querySelectorAll('.slide-track');
 const rightTracks = rightMarquee.querySelectorAll('.slide-track');
 let leftOffset = 0;
 let rightOffset = 0;
-let leftSpeed = 0.4;
-let rightSpeed = -0.4;
-let leftTouchStart = null;
-let rightTouchStart = null;
+let leftSpeed = 1.2;
+let rightSpeed = -1.2;
 
 function setTrackPosition(tracks, offset) {
   const length = tracks[0].offsetHeight;
@@ -69,30 +67,46 @@ function normalizeOffset(offset, length) {
   return offset;
 }
 
-function handleSwipe(startY, currentY, panel) {
-  const delta = currentY - startY;
-  const speed = delta * 0.15;
-
-  if (panel === 'left') {
-    leftSpeed = speed;
-  } else {
-    rightSpeed = speed;
-  }
-}
-
 function addInteraction(panelElement, panelKey) {
   let touchStartY = 0;
   let isTouching = false;
+  let pointerStartY = 0;
+  let isPointerDown = false;
 
   panelElement.addEventListener('wheel', (event) => {
     event.preventDefault();
     const delta = event.deltaY;
     if (panelKey === 'left') {
-      leftSpeed += delta * 0.02;
+      leftSpeed += delta * 0.04;
     } else {
-      rightSpeed += delta * 0.02;
+      rightSpeed += delta * 0.04;
     }
   }, { passive: false });
+
+  panelElement.addEventListener('pointerdown', (event) => {
+    isPointerDown = true;
+    pointerStartY = event.clientY;
+    panelElement.setPointerCapture(event.pointerId);
+  });
+
+  panelElement.addEventListener('pointermove', (event) => {
+    if (!isPointerDown) return;
+    const delta = event.clientY - pointerStartY;
+    if (panelKey === 'left') {
+      leftSpeed = delta * 0.18;
+    } else {
+      rightSpeed = delta * 0.18;
+    }
+    pointerStartY = event.clientY;
+  });
+
+  panelElement.addEventListener('pointerup', () => {
+    isPointerDown = false;
+  });
+
+  panelElement.addEventListener('pointercancel', () => {
+    isPointerDown = false;
+  });
 
   panelElement.addEventListener('touchstart', (event) => {
     isTouching = true;
@@ -116,8 +130,8 @@ function addInteraction(panelElement, panelKey) {
   });
 }
 
-addInteraction(leftMarquee, 'left');
-addInteraction(rightMarquee, 'right');
+addInteraction(document.querySelector('.left-panel'), 'left');
+addInteraction(document.querySelector('.right-panel'), 'right');
 
 let cursorActiveTimeout;
 document.addEventListener('mousemove', (event) => {
@@ -139,13 +153,13 @@ function animateTracks() {
     const length = leftTracks[0].offsetHeight;
     leftOffset = normalizeOffset(leftOffset + leftSpeed, length);
     setTrackPosition(leftTracks, leftOffset);
-    leftSpeed *= 0.96;
+    leftSpeed = leftSpeed * 0.95 + (leftSpeed > 0 ? 0.02 : -0.02);
   }
   if (rightTracks.length) {
     const length = rightTracks[0].offsetHeight;
     rightOffset = normalizeOffset(rightOffset + rightSpeed, length);
     setTrackPosition(rightTracks, rightOffset);
-    rightSpeed *= 0.96;
+    rightSpeed = rightSpeed * 0.95 + (rightSpeed > 0 ? 0.02 : -0.02);
   }
   requestAnimationFrame(animateTracks);
 }

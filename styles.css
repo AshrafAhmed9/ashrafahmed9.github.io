@@ -152,6 +152,7 @@ body {
   gap: 18px;
   z-index: 1;
   pointer-events: auto;
+  touch-action: pan-y;
 }
 
 .left-panel {
@@ -182,6 +183,7 @@ body {
   background: rgba(255,255,255,0.12);
   touch-action: pan-y;
   cursor: grab;
+  pointer-events: auto;
 }
 
 .marquee:active {
