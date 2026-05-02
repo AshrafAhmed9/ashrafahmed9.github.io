@@ -7,114 +7,73 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="page-shell">
-    <header class="hero-section">
-      <nav class="topbar">
-        <a class="brand" href="#">Ashraf Ahmed</a>
-        <div class="nav-links">
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#skills">Skills</a>
-          <a href="#contact">Contact</a>
-        </div>
-      </nav>
+  <div class="left-slideshow" id="left-slideshow">
+    <div class="slide">🐍<br>Python</div>
+    <div class="slide">☕<br>Java</div>
+    <div class="slide">⚡<br>FastAPI</div>
+    <div class="slide">🔄<br>REST APIs</div>
+    <div class="slide">🟦<br>PostgreSQL</div>
+    <div class="slide">🔴<br>Redis</div>
+    <div class="slide">🏗️<br>Distributed Systems</div>
+    <div class="slide">📋<br>Task Queues</div>
+    <div class="slide">💾<br>Caching</div>
+    <div class="slide">🚦<br>Rate Limiting</div>
+    <div class="slide">🐳<br>Docker</div>
+    <div class="slide">📚<br>Git</div>
+    <div class="slide">☁️<br>AWS EC2</div>
+    <div class="slide">🧠<br>DSA</div>
+    <div class="slide">🏛️<br>System Design</div>
+  </div>
 
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <h1>Ashraf Ahmed</h1>
-          <p class="subtitle">Backend Systems Engineer</p>
-          <p class="intro">Building scalable distributed systems with FastAPI, Redis, and PostgreSQL. Focused on high-performance APIs, task queues, and cloud deployments.</p>
-          <div class="contact-info">
-            <p><strong>Email:</strong> ashrafahmed1232@gmail.com</p>
-            <p><strong>Mobile:</strong> +91-9901916318</p>
-          </div>
-          <div class="social-links">
-            <a href="#" class="social-link">GitHub</a>
-            <a href="#" class="social-link">LinkedIn</a>
-            <a href="#" class="social-link">LeetCode</a>
-            <a href="#" class="social-link">Resume</a>
-          </div>
-        </div>
-
-        <div class="hero-card education-card">
-          <h3>Education</h3>
-          <p><strong>New Horizon College of Engineering</strong><br>
-          Bachelor of Technology - Computer Science and Engineering<br>
-          Nov. 2022 - June 2026 (Expected)<br>
-          GPA: 7.65</p>
-          <p><strong>Key Courses:</strong> Data Structures & Algorithms, Operating Systems, Computer Networks, Big Data, Cloud Computing, Database Systems, OOP, Engineering Mathematics, Design Thinking</p>
-        </div>
+  <div class="center">
+    <h1>Ashraf Ahmed</h1>
+    <p>ashrafahmed1232@gmail.com</p>
+    <div class="social-links">
+      <a href="#" class="social-link">GitHub</a>
+      <a href="#" class="social-link">LinkedIn</a>
+      <a href="#" class="social-link">LeetCode</a>
+      <a href="#" class="social-link">Resume</a>
+    </div>
+    <div class="repos">
+      <div class="repo-block">
+        <h3>Scalable ML Inference & Task Processing Platform</h3>
+        <p>Distributed ML inference system using FastAPI, Redis, and PostgreSQL.</p>
+        <a href="https://github.com/AshrafAhmed9/-SMTTP" target="_blank">Repository</a>
       </div>
-    </header>
-
-    <section id="about" class="section about-section">
-      <h2>About</h2>
-      <div class="about-grid">
-        <div class="skills-summary">
-          <h3>Skills Summary</h3>
-          <ul>
-            <li><strong>Languages:</strong> Python, Java</li>
-            <li><strong>Backend:</strong> FastAPI, REST APIs, Asynchronous Processing</li>
-            <li><strong>Databases:</strong> PostgreSQL, Redis</li>
-            <li><strong>Systems:</strong> Distributed Systems, Task Queues, Caching, Rate Limiting</li>
-            <li><strong>Tools:</strong> Docker, Git, AWS EC2</li>
-            <li><strong>Core:</strong> Data Structures & Algorithms, System Design Fundamentals</li>
-          </ul>
-        </div>
-        <div class="honors">
-          <h3>Honors</h3>
-          <p>LeetCode Achievements</p>
-        </div>
+      <div class="repo-block">
+        <h3>Distributed Task Queue System</h3>
+        <p>Python and Redis-based task processing system.</p>
+        <a href="#" target="_blank">Repository</a>
       </div>
-    </section>
-
-    <section id="projects" class="section projects-section">
-      <h2>Projects</h2>
-      <div class="projects-grid">
-        <article class="project-card">
-          <h3>Scalable ML Inference & Task Processing Platform</h3>
-          <p>Distributed ML inference system using FastAPI, Redis, and PostgreSQL with asynchronous processing, queue-based decoupling, worker pipelines, caching, rate limiting, and load testing.</p>
-          <a class="card-link" href="https://github.com/AshrafAhmed9/-SMTTP" target="_blank">Repository</a>
-        </article>
-        <article class="project-card">
-          <h3>Distributed Task Queue System (Mini Celery Clone)</h3>
-          <p>Python and Redis-based task processing system with producer-consumer architecture, job queuing, worker orchestration, and retry mechanisms.</p>
-          <a class="card-link" href="#" target="_blank">Repository</a>
-        </article>
-        <article class="project-card">
-          <h3>Lightweight Radar–Camera Fusion System (RAMP-CNN + YOLO)</h3>
-          <p>Multi-modal deep learning system combining RAMP-CNN with YOLO for object detection, optimized with CUDA acceleration.</p>
-          <a class="card-link" href="#" target="_blank">Repository</a>
-        </article>
-        <article class="project-card">
-          <h3>Face Recognition Attendance System</h3>
-          <p>Real-time face recognition pipeline using Python and OpenCV with backend database integration.</p>
-          <a class="card-link" href="#" target="_blank">Repository</a>
-        </article>
+      <div class="repo-block">
+        <h3>Radar–Camera Fusion System</h3>
+        <p>Multi-modal deep learning system with RAMP-CNN and YOLO.</p>
+        <a href="#" target="_blank">Repository</a>
       </div>
-    </section>
-
-    <section id="skills" class="section skills-section">
-      <h2>Tech Stack & Skills</h2>
-      <div class="skills-slideshow">
-        <div class="skills-inner" id="skills-slide"></div>
-        <div class="skills-controls">
-          <button id="prevSkill">‹</button>
-          <button id="nextSkill">›</button>
-        </div>
+      <div class="repo-block">
+        <h3>Face Recognition Attendance System</h3>
+        <p>Real-time face recognition pipeline with OpenCV.</p>
+        <a href="#" target="_blank">Repository</a>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <section id="contact" class="section contact-section">
-      <div class="contact-copy">
-        <h2>Let's Connect</h2>
-        <p>Interested in backend systems, distributed architectures, or ML pipelines? Reach out to discuss opportunities.</p>
-        <div class="contact-links">
-          <a class="btn btn-primary" href="mailto:ashrafahmed1232@gmail.com">Email Me</a>
-          <a class="btn btn-secondary" href="#" target="_blank">LinkedIn</a>
-        </div>
-      </div>
-    </section>
+  <div class="right-slideshow" id="right-slideshow">
+    <div class="slide">🐍<br>Python</div>
+    <div class="slide">☕<br>Java</div>
+    <div class="slide">⚡<br>FastAPI</div>
+    <div class="slide">🔄<br>REST APIs</div>
+    <div class="slide">🟦<br>PostgreSQL</div>
+    <div class="slide">🔴<br>Redis</div>
+    <div class="slide">🏗️<br>Distributed Systems</div>
+    <div class="slide">📋<br>Task Queues</div>
+    <div class="slide">💾<br>Caching</div>
+    <div class="slide">🚦<br>Rate Limiting</div>
+    <div class="slide">🐳<br>Docker</div>
+    <div class="slide">📚<br>Git</div>
+    <div class="slide">☁️<br>AWS EC2</div>
+    <div class="slide">🧠<br>DSA</div>
+    <div class="slide">🏛️<br>System Design</div>
   </div>
 
   <canvas id="gravity-canvas"></canvas>

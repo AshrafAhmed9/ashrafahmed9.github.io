@@ -1,45 +1,32 @@
-const skillsList = [
-  '🐍 Python — Versatile language for backend and ML',
-  '☕ Java — Object-oriented programming and enterprise apps',
-  '⚡ FastAPI — High-performance async web APIs',
-  '🔄 REST APIs — Scalable web service design',
-  '🟦 PostgreSQL — Robust relational database',
-  '🔴 Redis — In-memory data store for caching and queues',
-  '🏗️ Distributed Systems — Scalable architectures',
-  '📋 Task Queues — Asynchronous job processing',
-  '💾 Caching — Performance optimization',
-  '🚦 Rate Limiting — System stability',
-  '🐳 Docker — Containerized deployments',
-  '📚 Git — Version control and collaboration',
-  '☁️ AWS EC2 — Cloud infrastructure',
-  '🧠 DSA — Algorithms and data structures',
-  '🏛️ System Design — Scalable software architecture'
-];
-let skillIndex = 0;
-const skillSlide = document.getElementById('skills-slide');
-const prevSkill = document.getElementById('prevSkill');
-const nextSkill = document.getElementById('nextSkill');
+// Slideshow for sides
+const leftSlideshow = document.getElementById('left-slideshow');
+const rightSlideshow = document.getElementById('right-slideshow');
+const leftSlides = leftSlideshow.querySelectorAll('.slide');
+const rightSlides = rightSlideshow.querySelectorAll('.slide');
+let currentSlide = 0;
 
-function showSkill(index) {
-  skillSlide.innerHTML = `<div class="skill-item">${skillsList[index]}</div>`;
+function showSlide() {
+  leftSlides.forEach((slide, i) => {
+    slide.classList.toggle('active', i === currentSlide);
+  });
+  rightSlides.forEach((slide, i) => {
+    slide.classList.toggle('active', i === currentSlide);
+  });
+  currentSlide = (currentSlide + 1) % leftSlides.length;
 }
 
-function nextSkillItem() {
-  skillIndex = (skillIndex + 1) % skillsList.length;
-  showSkill(skillIndex);
-}
+setInterval(showSlide, 2000);
+showSlide();
 
-function prevSkillItem() {
-  skillIndex = (skillIndex - 1 + skillsList.length) % skillsList.length;
-  showSkill(skillIndex);
-}
+// Scroll with cursor
+document.addEventListener('mousemove', (e) => {
+  const y = e.clientY;
+  const translateY = (y - window.innerHeight / 2) * 0.3;
+  leftSlideshow.style.transform = `translateY(${translateY}px)`;
+  rightSlideshow.style.transform = `translateY(${translateY}px)`;
+});
 
-prevSkill.addEventListener('click', prevSkillItem);
-nextSkill.addEventListener('click', nextSkillItem);
-showSkill(0);
-setInterval(nextSkillItem, 3000);
-
-// Gravity effect
+// Gravity effect like over water
 const canvas = document.getElementById('gravity-canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
@@ -59,18 +46,27 @@ class Particle {
   }
 
   update(mouseX, mouseY) {
+    // Gravity down
+    this.speedY += 0.05;
     const dx = mouseX - this.x;
     const dy = mouseY - this.y;
     const distance = Math.sqrt(dx * dx + dy * dy);
     const force = (100 - distance) / 100;
     if (distance < 100) {
-      this.speedX += dx * force * 0.01;
-      this.speedY += dy * force * 0.01;
+      // Repel from cursor, like pushing water
+      this.speedX -= dx * force * 0.02;
+      this.speedY -= dy * force * 0.02;
     }
     this.x += this.speedX;
     this.y += this.speedY;
     this.speedX *= 0.99;
     this.speedY *= 0.99;
+
+    // Reset if out of bounds
+    if (this.y > canvas.height) {
+      this.y = 0;
+      this.speedY = 0;
+    }
   }
 
   draw() {
