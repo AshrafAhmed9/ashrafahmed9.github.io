@@ -255,11 +255,35 @@ body {
 @media (max-width: 1000px) {
   .left-panel,
   .right-panel {
-    display: none;
+    left: 50%;
+    right: auto;
+    width: min(92%, 420px);
+    transform: translateX(-50%);
+    position: fixed;
+    max-width: 92%;
+    box-shadow: 0 16px 60px rgba(0,0,0,0.28);
   }
+
+  .left-panel {
+    top: 16px;
+  }
+
+  .right-panel {
+    bottom: 16px;
+  }
+
+  .marquee {
+    height: 170px;
+  }
+
+  body {
+    padding: 220px 16px 220px;
+  }
+
   .repos {
     grid-template-columns: 1fr;
   }
+
   .center {
     padding: 32px 24px;
   }
@@ -267,7 +291,7 @@ body {
 
 @media (max-width: 680px) {
   body {
-    padding: 24px 16px;
+    padding: 200px 14px 200px;
   }
 
   .center h1 {
@@ -276,5 +300,17 @@ body {
 
   .social-links {
     gap: 10px;
+  }
+
+  .side-panel {
+    width: min(96%, 360px);
+  }
+
+  .slide {
+    padding: 14px 12px;
+  }
+
+  .slide .icon {
+    font-size: 2rem;
   }
 }
