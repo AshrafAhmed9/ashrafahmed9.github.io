@@ -47,24 +47,23 @@ function updateSlides() {
 }
 
 updateSlides();
-setInterval(updateSlides, 3000);
+setInterval(updateSlides, 2800);
 
 let cursorActiveTimeout;
 document.addEventListener('mousemove', (event) => {
   const { clientX, clientY } = event;
   cursorHighlight.style.left = `${clientX}px`;
   cursorHighlight.style.top = `${clientY}px`;
-  cursorHighlight.style.opacity = '1';
-  cursorHighlight.style.transform = 'translate(-50%, -50%) scale(1)';
+  cursorHighlight.style.opacity = '0.36';
+  cursorHighlight.style.transform = 'translate(-50%, -50%) scale(1.1)';
 
   clearTimeout(cursorActiveTimeout);
   cursorActiveTimeout = setTimeout(() => {
     cursorHighlight.style.opacity = '0';
-    cursorHighlight.style.transform = 'translate(-50%, -50%) scale(0.7)';
-  }, 120);
+    cursorHighlight.style.transform = 'translate(-50%, -50%) scale(0.8)';
+  }, 320);
 });
 
-// Gravity effect like water
 const canvas = document.getElementById('gravity-canvas');
 const ctx = canvas.getContext('2d');
 
@@ -76,16 +75,16 @@ function resizeCanvas() {
 resizeCanvas();
 
 let particles = [];
-const particleCount = 60;
+const particleCount = 70;
 
 class Particle {
   constructor(x, y) {
     this.x = x;
     this.y = y;
     this.radius = Math.random() * 2 + 1;
-    this.vx = Math.random() * 1.2 - 0.6;
-    this.vy = Math.random() * 1.2 - 0.6;
-    this.alpha = Math.random() * 0.5 + 0.15;
+    this.vx = Math.random() * 0.8 - 0.4;
+    this.vy = Math.random() * 0.8 - 0.4;
+    this.alpha = Math.random() * 0.4 + 0.15;
   }
 
   update(mouseX, mouseY) {
@@ -94,11 +93,11 @@ class Particle {
     const dist = Math.sqrt(dx * dx + dy * dy);
     if (dist < 120) {
       const push = (120 - dist) / 120;
-      this.vx -= dx * 0.001 * push;
-      this.vy -= dy * 0.001 * push;
+      this.vx -= dx * 0.0012 * push;
+      this.vy -= dy * 0.0012 * push;
     }
 
-    this.vy += 0.01;
+    this.vy += 0.008;
     this.x += this.vx;
     this.y += this.vy;
     this.vx *= 0.98;
@@ -107,7 +106,7 @@ class Particle {
     if (this.y > canvas.height + 20) {
       this.y = -10;
       this.x = Math.random() * canvas.width;
-      this.vy = Math.random() * 0.5 + 0.2;
+      this.vy = Math.random() * 0.5 + 0.15;
     }
     if (this.x < -20 || this.x > canvas.width + 20) {
       this.x = Math.random() * canvas.width;
@@ -115,7 +114,7 @@ class Particle {
   }
 
   draw() {
-    ctx.fillStyle = `rgba(180, 230, 255, ${this.alpha})`;
+    ctx.fillStyle = `rgba(170, 230, 255, ${this.alpha})`;
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
     ctx.fill();
