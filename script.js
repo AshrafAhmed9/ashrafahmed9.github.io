@@ -1,22 +1,49 @@
 const leftItems = [
   { icon: '🐍', label: 'Python' },
+  { icon: '☕', label: 'Java' },
+  { icon: '⚙️', label: 'C++' },
   { icon: '⚡', label: 'FastAPI' },
+  { icon: '🌿', label: 'Celery' },
+  { icon: '🔗', label: 'REST APIs' },
+  { icon: '🟦', label: 'PostgreSQL' },
   { icon: '🔴', label: 'Redis' },
   { icon: '🐳', label: 'Docker' },
-  { icon: '🟦', label: 'PostgreSQL' },
   { icon: '📚', label: 'Git' },
-  { icon: '☁️', label: 'AWS EC2' }
+  { icon: '☁️', label: 'AWS EC2' },
+  { icon: '🤖', label: 'BERT' },
+  { icon: '🧠', label: 'Groq LLM' },
+  { icon: '👁️', label: 'YOLO' },
+  { icon: '📡', label: 'RAMP-CNN' },
+  { icon: '🎮', label: 'CUDA' },
+  { icon: '🔐', label: 'JWT' },
+  { icon: '📝', label: 'WAL' },
+  { icon: '🌲', label: 'LSM-tree' },
+  { icon: '🔒', label: 'SHA-256' },
+  { icon: '📊', label: 'ELK Stack' },
+  { icon: '🌐', label: 'TCP' }
 ];
 
 const rightItems = [
-  { icon: '☕', label: 'Java' },
-  { icon: '🔄', label: 'REST APIs' },
   { icon: '🏗️', label: 'Distributed Systems' },
+  { icon: '🔄', label: 'Event-Driven Architecture' },
+  { icon: '🌊', label: 'Stream Processing' },
+  { icon: '💾', label: 'Caching Systems' },
   { icon: '📋', label: 'Task Queues' },
-  { icon: '💾', label: 'Caching' },
   { icon: '🚦', label: 'Rate Limiting' },
-  { icon: '🧠', label: 'DSA' },
-  { icon: '🏛️', label: 'System Design' }
+  { icon: '🧩', label: 'DSA' },
+  { icon: '🏛️', label: 'System Design' },
+  { icon: '⚖️', label: 'Load Testing' },
+  { icon: '🔭', label: 'Observability' },
+  { icon: '⚡', label: 'Concurrency' },
+  { icon: '🛡️', label: 'Fault Tolerance' },
+  { icon: '♾️', label: 'Eventual Consistency' },
+  { icon: '💻', label: 'Operating Systems' },
+  { icon: '🌐', label: 'Computer Networks' },
+  { icon: '📈', label: 'Big Data' },
+  { icon: '☁️', label: 'Cloud Computing' },
+  { icon: '🔷', label: 'OOP' },
+  { icon: '🗄️', label: 'Database Systems' },
+  { icon: '💡', label: 'Design Thinking' }
 ];
 
 const leftMarquee = document.getElementById('left-marquee');
@@ -36,10 +63,12 @@ function buildLoopingTrack(container, items) {
   const trackB = document.createElement('div');
   trackB.className = 'slide-track';
 
-  items.forEach(item => {
-    trackA.appendChild(createSlide(item));
-    trackB.appendChild(createSlide(item));
-  });
+  for (let i = 0; i < 4; i++) {
+    items.forEach(item => {
+      trackA.appendChild(createSlide(item));
+      trackB.appendChild(createSlide(item));
+    });
+  }
 
   container.appendChild(trackA);
   container.appendChild(trackB);
@@ -75,8 +104,10 @@ function normalizeOffset(offset, length) {
 
 function addInteraction(panelElement, panelKey) {
   let touchStartY = 0;
+  let touchStartX = 0;
   let isTouching = false;
   let pointerStartY = 0;
+  let pointerStartX = 0;
   let isPointerDown = false;
 
   panelElement.addEventListener('wheel', (event) => {
@@ -92,18 +123,26 @@ function addInteraction(panelElement, panelKey) {
   panelElement.addEventListener('pointerdown', (event) => {
     isPointerDown = true;
     pointerStartY = event.clientY;
+    pointerStartX = event.clientX;
     panelElement.setPointerCapture(event.pointerId);
   });
 
   panelElement.addEventListener('pointermove', (event) => {
     if (!isPointerDown) return;
-    const delta = event.clientY - pointerStartY;
+    const isMobile = window.innerWidth <= 1000;
+    let delta;
+    if (isMobile) {
+      delta = event.clientX - pointerStartX;
+      pointerStartX = event.clientX;
+    } else {
+      delta = event.clientY - pointerStartY;
+      pointerStartY = event.clientY;
+    }
     if (panelKey === 'left') {
       leftSpeed = delta * 0.18;
     } else {
       rightSpeed = delta * 0.18;
     }
-    pointerStartY = event.clientY;
   });
 
   panelElement.addEventListener('pointerup', () => {
@@ -117,18 +156,28 @@ function addInteraction(panelElement, panelKey) {
   panelElement.addEventListener('touchstart', (event) => {
     isTouching = true;
     touchStartY = event.touches[0].clientY;
+    touchStartX = event.touches[0].clientX;
   });
 
   panelElement.addEventListener('touchmove', (event) => {
     if (!isTouching) return;
-    const currentY = event.touches[0].clientY;
-    const delta = currentY - touchStartY;
+    const isMobile = window.innerWidth <= 1000;
+    let delta;
+    if (isMobile) {
+      const currentX = event.touches[0].clientX;
+      delta = currentX - touchStartX;
+      touchStartX = currentX;
+      event.preventDefault();
+    } else {
+      const currentY = event.touches[0].clientY;
+      delta = currentY - touchStartY;
+      touchStartY = currentY;
+    }
     if (panelKey === 'left') {
       leftSpeed = delta * 0.18;
     } else {
       rightSpeed = delta * 0.18;
     }
-    touchStartY = currentY;
   }, { passive: false });
 
   panelElement.addEventListener('touchend', () => {
@@ -158,21 +207,19 @@ function animateTracks() {
   const isMobile = window.innerWidth <= 1000;
 
   if (leftTracks.length) {
-    const length = isMobile
-      ? leftTracks[0].offsetWidth
-      : leftTracks[0].offsetHeight;
-
-    leftOffset = normalizeOffset(leftOffset + leftSpeed, length);
-    setTrackPosition(leftTracks, leftOffset, isMobile);
+    const length = isMobile ? leftTracks[0].offsetWidth : leftTracks[0].offsetHeight;
+    if (length > 0) {
+      leftOffset = normalizeOffset(leftOffset + leftSpeed, length);
+      setTrackPosition(leftTracks, leftOffset, isMobile);
+    }
   }
 
   if (rightTracks.length) {
-    const length = isMobile
-      ? rightTracks[0].offsetWidth
-      : rightTracks[0].offsetHeight;
-
-    rightOffset = normalizeOffset(rightOffset + rightSpeed, length);
-    setTrackPosition(rightTracks, rightOffset, isMobile);
+    const length = isMobile ? rightTracks[0].offsetWidth : rightTracks[0].offsetHeight;
+    if (length > 0) {
+      rightOffset = normalizeOffset(rightOffset + rightSpeed, length);
+      setTrackPosition(rightTracks, rightOffset, isMobile);
+    }
   }
 
   requestAnimationFrame(animateTracks);

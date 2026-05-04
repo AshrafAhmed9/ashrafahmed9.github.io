@@ -46,7 +46,7 @@ body {
   line-height: 1.5;
   min-height: 100vh;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 40px 20px;
@@ -177,6 +177,7 @@ body {
 }
 
 .marquee {
+  position: relative;
   overflow: hidden;
   height: 420px;
   border-radius: 30px;
@@ -192,6 +193,10 @@ body {
 }
 
 .slide-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -252,57 +257,76 @@ body {
   pointer-events: none;
   z-index: 0;
 }
-@media (max-width: 1000px) {
 
+.section-title {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  color: rgba(255,255,255,0.9);
+}
+
+@media (max-width: 1000px) {
   body {
-    display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    gap: 16px;
   }
 
-  /* REMOVE floating behavior */
   .side-panel {
     position: static;
     transform: none;
     width: 100%;
-    margin: 10px 0;
+    margin: 0;
+    touch-action: none;
   }
 
-  /* Top banner */
   .left-panel {
     order: 1;
   }
 
-  /* Center content */
   .center {
     order: 2;
     width: 100%;
+    padding: 28px 20px;
   }
 
-  /* Bottom banner */
   .right-panel {
     order: 3;
   }
 
-  /* Horizontal scrolling */
   .marquee {
-    height: auto;
+    height: 130px;
+    touch-action: none;
+    cursor: grab;
   }
-  .marquee .slide-track:nth-child(2) {
-  display: none;
-}
 
   .slide-track {
-  flex-direction: row;
-  white-space: nowrap;
-}
+    flex-direction: row;
+    width: max-content;
+    height: 100%;
+    padding: 10px 8px;
+    gap: 10px;
+  }
 
-.slide {
-  min-width: 120px;   /* prevents stacking */
-}
+  .slide {
+    min-width: 110px;
+    width: 110px;
+    flex-shrink: 0;
+    padding: 12px 10px;
+    gap: 6px;
+  }
 
-  /* Fix repo layout */
+  .slide .icon {
+    font-size: 1.6rem;
+  }
+
+  .slide .label {
+    font-size: 0.78rem;
+  }
+
   .repos {
     grid-template-columns: 1fr;
   }
@@ -310,34 +334,38 @@ body {
 
 @media (max-width: 680px) {
   body {
-    padding: 40px 16px;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .center {
+    padding: 24px 16px;
   }
 
   .center h1 {
-    font-size: 3rem;
+    font-size: 2.4rem;
   }
 
   .social-links {
-    gap: 10px;
+    gap: 8px;
   }
 
-  .side-panel {
-    width: min(96%, 360px);
+  .social-link {
+    padding: 8px 14px;
+    font-size: 0.9rem;
   }
 
   .slide {
-    padding: 14px 12px;
+    min-width: 96px;
+    width: 96px;
+    padding: 10px 8px;
   }
 
   .slide .icon {
-    font-size: 2rem;
+    font-size: 1.4rem;
   }
-}
-.section-title {
-  margin-top: 40px;
-  margin-bottom: 10px;
-  font-size: 1.6rem;
-  font-weight: 700;
-  text-align: center;   /* alignment here */
-  color: rgba(255,255,255,0.9);
+
+  .slide .label {
+    font-size: 0.72rem;
+  }
 }
