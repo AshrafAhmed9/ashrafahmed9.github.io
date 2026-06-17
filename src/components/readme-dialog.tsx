@@ -161,10 +161,10 @@ export function ReadmeDialog({ repo, open, onOpenChange }: ReadmeDialogProps) {
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
               components={{
-                img: ({ src, alt, ...props }) => (
+                img: ({ src, alt, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    src={rewriteImageSrc(src, repo, branch)}
+                    src={rewriteImageSrc(typeof src === "string" ? src : undefined, repo, branch)}
                     alt={alt ?? ""}
                     className="max-w-full rounded-lg"
                     {...props}
