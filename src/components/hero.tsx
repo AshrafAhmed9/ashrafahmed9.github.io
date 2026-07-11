@@ -26,11 +26,29 @@ export function Hero() {
           {profile.tagline}
         </motion.p>
 
+        <motion.p
+          className="mx-auto mt-6 max-w-2xl text-lg font-medium text-foreground sm:text-xl"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.25 }}
+        >
+          {profile.credibility}
+        </motion.p>
+
+        <motion.p
+          className="mt-4 text-base text-muted-foreground"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+        >
+          {profile.availability}
+        </motion.p>
+
         <motion.div
           className="mt-12 flex flex-wrap items-center justify-center gap-5"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.45 }}
         >
           <Button asChild size="lg" className="text-lg px-8 py-6">
             <a href="#work">View Work</a>
