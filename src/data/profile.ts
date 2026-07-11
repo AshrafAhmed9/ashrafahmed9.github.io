@@ -6,10 +6,10 @@ export const profile = {
   education: {
     institution: "New Horizon College of Engineering, Bengaluru",
     degree: "B.E in Computer Science and Engineering",
-    period: "Nov 2022 – June 2026",
+    period: "Nov 2022 – July 2026",
     gpa: "7.71",
     coursework:
-      "Data Structures & Algorithms, Operating Systems, Computer Networks, Database Systems, Big Data, Cloud Computing",
+      "Data Structures & Algorithms, Design & Analysis of Algorithms, Operating Systems, Computer Networks, Database Management Systems, Linux System Programming, Computer Architecture (ARM), Machine Learning, Generative AI, Cloud Architecture & Security",
   },
   publication:
     'ASIANCONF 2026 — "Lightweight Radar-Camera Fusion for Real-Time Drone Detection" (Peer-reviewed)',

@@ -1,6 +1,7 @@
 import {
   SiPython, SiCplusplus, SiFastapi, SiCelery, SiPostgresql,
   SiRedis, SiDocker, SiGit, SiPytorch, SiGo, SiSqlite,
+  SiSpringboot, SiApachekafka, SiTypescript, SiKubernetes,
 } from "react-icons/si";
 import {
   Network, Zap, Waves, Database, ListTodo, Timer,
@@ -30,13 +31,17 @@ export const skillGroups: SkillGroup[] = [
       { name: "Go", Icon: SiGo },
       { name: "Java", Icon: Coffee },
       { name: "C++", Icon: SiCplusplus },
+      { name: "TypeScript", Icon: SiTypescript },
     ],
   },
   {
     category: "Backend",
     skills: [
       { name: "FastAPI", Icon: SiFastapi },
+      { name: "Spring Boot", Icon: SiSpringboot },
       { name: "Gin", Icon: SiGo },
+      { name: "gRPC", Icon: Network },
+      { name: "Kafka", Icon: SiApachekafka },
       { name: "REST APIs", Icon: Link },
       { name: "Celery", Icon: SiCelery },
       { name: "Async Processing", Icon: Zap },
@@ -70,6 +75,7 @@ export const skillGroups: SkillGroup[] = [
     category: "Tools",
     skills: [
       { name: "Docker", Icon: SiDocker },
+      { name: "Kubernetes", Icon: SiKubernetes },
       { name: "GitHub Actions", Icon: GitBranch },
       { name: "AWS EC2", Icon: Cloud },
       { name: "Locust", Icon: Bug },
