@@ -9,8 +9,9 @@ import { profile } from "@/data/profile";
 import { useEffect, useState } from "react";
 
 const navLinks = [
-  { label: "About", href: "#about" },
+  { label: "Open Source", href: "#open-source" },
   { label: "Work", href: "#work" },
+  { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
 
