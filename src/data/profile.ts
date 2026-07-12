@@ -2,7 +2,7 @@ export const profile = {
   name: "Ashraf Ahmed",
   email: "ashrafahmed1232@gmail.com",
   tagline: "Backend, Systems & ML-focused Engineer.",
-  credibility: "Contributor to Zalando Skipper & CNCF etcd — 5 merged PRs running in production.",
+  credibility: "Contributor to Zalando Skipper & CNCF etcd — 6 merged PRs running in production, including a load-balancing algorithm.",
   availability: "Final-year CS · Bengaluru, India · open to SWE roles, 2026",
   bio: "Final-year Computer Science student and backend/distributed systems engineer with hands-on experience building production-grade distributed applications, high-performance storage engines, and real-time AI inference platforms. Proven expertise in designing scalable, reliable, and observable systems that handle high concurrency with low latency.",
   education: {

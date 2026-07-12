@@ -10,6 +10,16 @@ export interface Contribution {
 
 export const contributions: Contribution[] = [
   {
+    title: "weightedRoundRobin Load-Balancing Algorithm",
+    repo: "zalando/skipper",
+    pr: 4124,
+    description:
+      "Designed and shipped a smooth weighted round-robin algorithm with dynamic health-derived endpoint weights. Defended the locking design under maintainer review with a self-built C benchmark harness sustaining ~31k req/s at 1,000 endpoints — the harness was kept in the repo for testing all algorithms.",
+    stars: "3.1K+",
+    lines: "+599/−4",
+    url: "https://github.com/zalando/skipper/pull/4124",
+  },
+  {
     title: "Prometheus Native Histogram Support",
     repo: "zalando/skipper",
     pr: 4108,
