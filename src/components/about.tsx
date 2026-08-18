@@ -46,8 +46,10 @@ export function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <p className="text-lg font-medium text-foreground">Publication</p>
-          <p>{profile.publication}</p>
+          <p className="text-lg font-medium text-foreground">Publications</p>
+          {profile.publications.map((pub) => (
+            <p key={pub} className="mt-2">{pub}</p>
+          ))}
         </motion.div>
       </div>
     </section>

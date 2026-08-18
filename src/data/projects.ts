@@ -10,7 +10,7 @@ export const projects: Project[] = [
   {
     title: "Aegis — AI-Native Distributed Systems Observability Platform",
     description:
-      "Automated microservice failure prediction and root-cause analysis, achieving a 228-second predictive warning lead time and 100% topological diagnosis agreement, by engineering an event-time stream correlator using Kafka and a shadow-mode MLOps pipeline with HistGradientBoosting and PSI drift monitoring.",
+      "Automated microservice failure prediction and root-cause analysis: an event-time Kafka stream correlator whose topological RCA was correct on all 78 evaluated incidents, a statistical detector (EWMA z-score + OLS trend projection) reaching 228-second median lead time, and a HistGradientBoosting classifier evaluated in shadow mode against it with PSI drift monitoring, a versioned registry and gated retraining.",
     tags: ["Python", "FastAPI", "Kafka", "Scikit-Learn", "React", "Prometheus"],
     repo: "AshrafAhmed9/aegis-observability",
   },
@@ -43,10 +43,10 @@ export const projects: Project[] = [
     repo: "AshrafAhmed9/log-systems",
   },
   {
-    title: "Lightweight Radar–Camera Fusion System (RAMP-CNN + YOLO)",
+    title: "Radar–Camera Fusion for Real-Time Drone Detection (YOLOv8n + LSTM)",
     description:
-      "Multi-modal object detection system achieving >90% accuracy on 5,000+ COCO samples with CUDA acceleration. Published as peer-reviewed research paper (ASIANCONF 2026).",
-    tags: ["Python", "PyTorch", "CUDA"],
+      "Confidence-weighted late fusion of YOLOv8n detection with radar-inspired motion features, lifting precision from 0.91 to 0.94 (F1 0.92) while holding 8.3 FPS real-time inference on CPU — no GPU required at serving time. An LSTM trajectory forecaster cut RMSE from 1.78 to 1.64 versus a GRU baseline. Two peer-reviewed IEEE papers (ASIACONF 2026, C2I6 2025).",
+    tags: ["Python", "PyTorch", "YOLOv8n", "LSTM", "Ultralytics", "CUDA (training)"],
     repo: "AshrafAhmed9/RampYOLO",
   },
 ];

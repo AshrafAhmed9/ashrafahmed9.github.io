@@ -20,6 +20,16 @@ export const contributions: Contribution[] = [
     url: "https://github.com/zalando/skipper/pull/4124",
   },
   {
+    title: "mobilize — Wave Dispatch Agent + MCP Server",
+    repo: "CALLE-AI/awesome-phone-call-agents",
+    pr: 98,
+    description:
+      "Shipped an agent app and MCP server that treats a model's stated confirmation as a noisy signal rather than a fact — scoring call evidence against historical show-rate before it counts. A 300-trial evaluation harness against a synthetic population with known ground truth measured 94.6% accuracy for the calibrated policy vs 87.7% for trusting every stated yes. Crash-safe dispatch via a write-ahead ledger, verified with a real SIGKILL'd subprocess. 89 tests.",
+    stars: "CALL-E",
+    lines: "+6,714",
+    url: "https://github.com/CALLE-AI/awesome-phone-call-agents/pull/98",
+  },
+  {
     title: "Prometheus Native Histogram Support",
     repo: "zalando/skipper",
     pr: 4108,
@@ -44,7 +54,7 @@ export const contributions: Contribution[] = [
     repo: "etcd-io/website",
     pr: 1171,
     description:
-      "Clarified security documentation for certificate-matching semantics across v3.5–v3.7, resolving a long-standing confusion about wildcard support.",
+      "Clarified security documentation for certificate-matching semantics across v3.5–v3.7, resolving a 14-month-old confusion issue about wildcard support. Merged by a core maintainer.",
     stars: "48K+",
     lines: "+6/−3",
     url: "https://github.com/etcd-io/website/pull/1171",
