@@ -1,5 +1,5 @@
 export const profile = {
-  name: "Ashraf Ahmed",
+  name: "K Ashraf Ahmed",
   email: "ashrafahmed1232@gmail.com",
   tagline: "Backend & ML Systems Engineer.",
   credibility: "Contributor to Zalando Skipper, CNCF etcd & CALL-E — 7 merged PRs running in production, including a load-balancing algorithm.",
