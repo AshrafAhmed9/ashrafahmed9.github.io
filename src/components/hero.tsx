@@ -12,9 +12,16 @@ export function Hero() {
   const linkedin = profile.socials.find((s) => s.name === "LinkedIn");
 
   return (
-    <section className="relative flex min-h-[calc(100vh-6rem)] items-center justify-center px-6">
+    <section className="relative flex min-h-[calc(100vh-6rem)] flex-col items-center justify-center px-6">
+      {/*
+        On mobile the row wraps to multiple lines (3 pills, narrow viewport),
+        so it stays in normal flow there to avoid colliding with the name
+        below it. From sm+ up it fits on one line, so it's pulled out of flow
+        (absolute) to sit closer to the top without affecting the name's
+        centered position — same trick, just gated to where it's safe.
+      */}
       <motion.div
-        className="absolute top-20 left-1/2 flex -translate-x-1/2 flex-wrap items-center justify-center gap-4 px-6 sm:top-24"
+        className="relative mb-10 flex flex-wrap items-center justify-center gap-4 px-6 sm:absolute sm:top-24 sm:left-1/2 sm:mb-0 sm:-translate-x-1/2"
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}

@@ -489,7 +489,7 @@
       "file_type": "code",
       "norm_label": "phasesection()",
       "source_file": "src/components/scroll-deck.tsx",
-      "source_location": "L55"
+      "source_location": "L48"
     },
     {
       "id": "src_components_scroll_deck_scrolldeck",
@@ -501,7 +501,7 @@
       "file_type": "code",
       "norm_label": "scrolldeck()",
       "source_file": "src/components/scroll-deck.tsx",
-      "source_location": "L96"
+      "source_location": "L89"
     },
     {
       "id": "src_components_scroll_deck_slug",
@@ -513,7 +513,7 @@
       "file_type": "code",
       "norm_label": "slug()",
       "source_file": "src/components/scroll-deck.tsx",
-      "source_location": "L53"
+      "source_location": "L46"
     },
     {
       "id": "package_dependencies",
@@ -2253,7 +2253,7 @@
       "file_type": "code",
       "norm_label": "panels",
       "source_file": "src/components/scroll-deck.tsx",
-      "source_location": "L47"
+      "source_location": "L40"
     },
     {
       "id": "src_components_scroll_deck_phases",
@@ -2264,7 +2264,7 @@
       "file_type": "code",
       "norm_label": "phases",
       "source_file": "src/components/scroll-deck.tsx",
-      "source_location": "L52"
+      "source_location": "L45"
     },
     {
       "id": "src_components_scroll_deck_projectitems",
@@ -2275,7 +2275,7 @@
       "file_type": "code",
       "norm_label": "projectitems",
       "source_file": "src/components/scroll-deck.tsx",
-      "source_location": "L39"
+      "source_location": "L32"
     },
     {
       "id": "src_components_scroll_deck_workitems",
@@ -2391,7 +2391,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/scroll-deck.tsx",
-      "source_location": "L78",
+      "source_location": "L71",
       "weight": 1.0
     },
     {
@@ -2403,7 +2403,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/scroll-deck.tsx",
-      "source_location": "L101",
+      "source_location": "L94",
       "weight": 1.0
     },
     {
@@ -4759,7 +4759,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/scroll-deck.tsx",
-      "source_location": "L39",
+      "source_location": "L32",
       "weight": 1.0
     },
     {
@@ -4770,7 +4770,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/scroll-deck.tsx",
-      "source_location": "L47",
+      "source_location": "L40",
       "weight": 1.0
     },
     {
@@ -4781,7 +4781,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/scroll-deck.tsx",
-      "source_location": "L52",
+      "source_location": "L45",
       "weight": 1.0
     },
     {
@@ -4792,7 +4792,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/scroll-deck.tsx",
-      "source_location": "L53",
+      "source_location": "L46",
       "weight": 1.0
     },
     {
@@ -4803,7 +4803,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/scroll-deck.tsx",
-      "source_location": "L55",
+      "source_location": "L48",
       "weight": 1.0
     },
     {
@@ -4814,7 +4814,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/scroll-deck.tsx",
-      "source_location": "L96",
+      "source_location": "L89",
       "weight": 1.0
     },
     {
@@ -5292,5 +5292,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "2338efcaf66efa6359557831e8e2b2f9c54ba923"
+  "built_at_commit": "22c8f3711b9da141c3536b0c3d9cca5b95b428f8"
 }
