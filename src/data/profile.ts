@@ -2,9 +2,19 @@ export const profile = {
   name: "K Ashraf Ahmed",
   email: "ashrafahmed1232@gmail.com",
   tagline: "Backend & ML Systems Engineer.",
-  credibility: "Contributor to Zalando Skipper, CNCF etcd & CALL-E — 7 merged PRs running in production, including a load-balancing algorithm.",
+  credibility: "Contributor to Zalando Skipper, CNCF etcd & CALL-E — 8 merged PRs running in production, including a load-balancing algorithm.",
   availability: "Associate Software Engineer @ The Jobs Jungle · Bengaluru, India · open to backend & ML-infrastructure roles",
-  bio: "Backend and ML-systems engineer in Bengaluru. I build infrastructure that behaves like production rather than like a demo: a storage engine with crash-recovery proofs under kill -9, an inference platform with circuit breakers and a dead-letter queue, and an ML pipeline whose retraining is gated on offline evaluation. Currently an Associate Software Engineer at The Jobs Jungle, working in Java/Spring Boot, and a contributor to Zalando Skipper and CNCF etcd.",
+  bio: "Backend and ML-systems engineer in Bengaluru. I build infrastructure that behaves like production rather than like a demo: a storage engine with crash-recovery proofs under kill -9, an inference platform with circuit breakers and a dead-letter queue, and an ML pipeline whose retraining is gated on offline evaluation. Currently an Associate Software Engineer at The Jobs Jungle, working in Java/Spring Boot, and a contributor to Zalando Skipper, CNCF etcd and CALL-E.",
+  experience: {
+    company: "The Jobs Jungle",
+    role: "Associate Software Engineer",
+    location: "Bengaluru, India",
+    period: "Aug 2026 – Present",
+    bullets: [
+      "Develop and maintain REST APIs for the applicant-tracking platform on Java 17 / Spring Boot 3 over MongoDB, securing endpoints with JWT + OAuth2 (Google, LinkedIn) and role-based access control.",
+      "Write JUnit and Spring Security tests against OpenAPI-documented service contracts; triage and resolve issues across development, staging, and production environments.",
+    ],
+  },
   education: {
     institution: "New Horizon College of Engineering, Bengaluru",
     degree: "B.E in Computer Science and Engineering",

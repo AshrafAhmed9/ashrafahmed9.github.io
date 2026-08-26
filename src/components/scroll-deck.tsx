@@ -22,10 +22,17 @@ const openSourceItems: TreeItem[] = contributions.map((c) => ({
 
 const workItems: TreeItem[] = [
   {
-    title: "Associate Software Engineer — The Jobs Jungle",
-    subtitle: "Bengaluru, India · Aug 2026 – Present",
-    description: profile.bio,
-    meta: ["Java", "Spring Boot"],
+    title: `${profile.experience.role} — ${profile.experience.company}`,
+    subtitle: `${profile.experience.location} · ${profile.experience.period}`,
+    description: profile.experience.bullets.join(" "),
+    meta: [
+      "Java 17",
+      "Spring Boot 3",
+      "MongoDB",
+      "JWT + OAuth2",
+      "JUnit",
+      "OpenAPI",
+    ],
   },
 ];
 

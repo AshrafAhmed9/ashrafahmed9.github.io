@@ -8,7 +8,7 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "Aegis — AI-Native Distributed Systems Observability Platform",
+    title: "Aegis — Predictive Observability Platform",
     description:
       "Automated microservice failure prediction and root-cause analysis: an event-time Kafka stream correlator whose topological RCA was correct on all 78 evaluated incidents, a statistical detector (EWMA z-score + OLS trend projection) reaching 228-second median lead time, and a HistGradientBoosting classifier evaluated in shadow mode against it with PSI drift monitoring, a versioned registry and gated retraining.",
     tags: ["Python", "FastAPI", "Kafka", "Scikit-Learn", "React", "Prometheus"],
@@ -29,7 +29,7 @@ export const projects: Project[] = [
     repo: "AshrafAhmed9/kv-store",
   },
   {
-    title: "ClearText API — Async AI Inference Platform",
+    title: "ClearText API — Async ML Inference Platform",
     description:
       "Optimized toxic comment ML inference throughput, scaling to 231 requests/sec at 106ms average latency under a 500 concurrent-user load, by building an asynchronous FastAPI serving backend utilizing Celery task queues, Redis model-versioned caching, and a custom worker micro-batcher.",
     tags: ["FastAPI", "Redis", "PostgreSQL", "Celery", "Groq LLM"],

@@ -20,6 +20,16 @@ export const contributions: Contribution[] = [
     url: "https://github.com/zalando/skipper/pull/4124",
   },
   {
+    title: "lifoWithBody / lifoGroupWithBody — Concurrency-Limit Fix",
+    repo: "zalando/skipper",
+    pr: 4188,
+    description:
+      "lifo released its concurrency queue slot as soon as the backend sent response headers, so a backend streaming a long body left the slot free and the route admitted past MaxConcurrency. Added lifoWithBody and lifoGroupWithBody that hold the slot until the body finishes streaming, using a separate state-bag key so a plain lifo() on the same route can't pop the release function early. The regression test fails against the old filters — they wrongly return 200 where the new ones correctly return 502 on queue timeout.",
+    stars: "3.1K+",
+    lines: "+275/−17",
+    url: "https://github.com/zalando/skipper/pull/4188",
+  },
+  {
     title: "mobilize — Wave Dispatch Agent + MCP Server",
     repo: "CALLE-AI/awesome-phone-call-agents",
     pr: 98,
