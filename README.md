@@ -1,4 +1,4 @@
-# Portfolio — Ashraf Ahmed
+# Portfolio — K Ashraf Ahmed
 
 Personal portfolio site built with Next.js, TypeScript, Tailwind CSS v4, shadcn/ui, and Framer Motion. Deployed to GitHub Pages at [ashrafahmed9.github.io](https://ashrafahmed9.github.io).
 
