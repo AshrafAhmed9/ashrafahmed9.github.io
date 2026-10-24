@@ -1,18 +1,19 @@
 export const profile = {
   name: "K Ashraf Ahmed",
   email: "ashrafahmed1232@gmail.com",
-  tagline: "Backend & ML Systems Engineer.",
-  credibility: "Contributor to Zalando Skipper, CNCF etcd & CALL-E — 8 merged PRs running in production, including a load-balancing algorithm.",
-  availability: "Associate Software Engineer @ The Jobs Jungle · Bengaluru, India · open to backend & ML-infrastructure roles",
-  bio: "Backend and ML-systems engineer in Bengaluru. I build infrastructure that behaves like production rather than like a demo: a storage engine with crash-recovery proofs under kill -9, an inference platform with circuit breakers and a dead-letter queue, and an ML pipeline whose retraining is gated on offline evaluation. Currently an Associate Software Engineer at The Jobs Jungle, working in Java/Spring Boot, and a contributor to Zalando Skipper, CNCF etcd and CALL-E.",
+  tagline: "AI Systems & Backend Engineer.",
+  credibility: "12 merged PRs across 8 open-source repositories, including Zalando Skipper, CNCF etcd and CALL-E.",
+  availability: "Associate Software Engineer @ The Jobs Jungle · Bengaluru, India · open to AI engineering, forward deployed and AI infrastructure roles",
+  bio: "Software engineer in Bengaluru working on AI systems and the backends under them. At The Jobs Jungle I build AI features for an applicant-tracking product in Java and Spring Boot: a voice interviewer, a candidate-sourcing pipeline and the cost tracking around our LLM calls. On my own time I build infrastructure from first principles: Kiln, an LLM inference engine in C++ and CUDA, and Consensa, a distributed vector database in Go with hand-written Raft. I also contribute to Zalando Skipper, CNCF etcd and CALL-E.",
   experience: {
     company: "The Jobs Jungle",
     role: "Associate Software Engineer",
     location: "Bengaluru, India",
     period: "Aug 2026 – Present",
     bullets: [
-      "Develop and maintain REST APIs for the applicant-tracking platform on Java 17 / Spring Boot 3 over MongoDB, securing endpoints with JWT + OAuth2 (Google, LinkedIn) and role-based access control.",
-      "Write JUnit and Spring Security tests against OpenAPI-documented service contracts; triage and resolve issues across development, staging, and production environments.",
+      "Shipped two paid AI features for recruiting agencies: a voice interviewer where OpenAI writes the questions and scores each answer, with guardrails that keep accent, age and other protected traits out of the score, and an LLM pipeline that searches the web and ranks candidates for a job.",
+      "Gave the team its first view of LLM spend by tracking tokens and estimated cost across 8 LLM call sites, and added prompt caching where identical requests were being re-sent.",
+      "Cut extra database lookups per application page from 40 to 2 and job-list payloads by 46%, built candidate data retention and erasure across 14 record types, and fixed 5 production security vulnerabilities.",
     ],
   },
   education: {
@@ -27,8 +28,7 @@ export const profile = {
     'IEEE ASIACONF 2026 — "Lightweight Radar-Camera Fusion for Real-Time Drone Detection and Trajectory Prediction" (peer-reviewed): confidence-weighted late fusion of YOLOv8n with radar-inspired features lifted precision 0.91 → 0.94 at 8.3 FPS CPU-only inference.',
     'IEEE C2I6 2025 — "Lightweight Real-Time Drone Detection and Trajectory Forecasting Using YOLOv8 and LSTM Networks" (peer-reviewed): mAP 0.89 at ~9 FPS CPU-only inference.',
   ],
-  resumeUrl:
-    "https://drive.google.com/file/d/1zPCwd0AwqF7R8L6IhKhuwkbcIUHGln4c/view?usp=sharing",
+  resumeUrl: "/Ashraf_Ahmed_Software_Engineer.pdf",
   socials: [
     {
       name: "GitHub",

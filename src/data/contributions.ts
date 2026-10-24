@@ -44,7 +44,7 @@ export const contributions: Contribution[] = [
     repo: "zalando/skipper",
     pr: 4108,
     description:
-      "Implemented opt-in native histogram support with OTEL-recommended bucket tuning, deploying to production Kubernetes clusters while maintaining backward compatibility with existing dashboards.",
+      "Added opt-in Prometheus native histograms behind a flag, with bucket limits set per the Prometheus and OTEL recommendations to bound memory. Classic histograms are still emitted alongside them, so existing dashboards and alerts keep working. Fixes #3898.",
     stars: "3.1K+",
     lines: "+245/−146",
     url: "https://github.com/zalando/skipper/pull/4108",

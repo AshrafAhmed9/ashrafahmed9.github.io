@@ -1,7 +1,7 @@
 import {
   SiPython, SiCplusplus, SiFastapi, SiCelery, SiPostgresql,
   SiRedis, SiDocker, SiGit, SiPytorch, SiGo, SiSqlite,
-  SiSpringboot, SiApachekafka, SiTypescript, SiKubernetes,
+  SiSpringboot, SiApachekafka, SiTypescript,
   SiMongodb, SiGithubactions, SiPytest, SiJsonwebtokens,
   SiUltralytics, SiNvidia, SiC, SiJavascript,
 } from "react-icons/si";
@@ -69,6 +69,7 @@ export const skillGroups: SkillGroup[] = [
     category: "Systems",
     skills: [
       { name: "Distributed Systems", Icon: Network },
+      { name: "Raft Consensus", Icon: Network },
       { name: "Caching", Icon: Database },
       { name: "Rate Limiting", Icon: Timer },
       { name: "Task Queues", Icon: ListTodo },
@@ -82,13 +83,12 @@ export const skillGroups: SkillGroup[] = [
     category: "Tools",
     skills: [
       { name: "Docker", Icon: SiDocker },
-      { name: "Kubernetes", Icon: SiKubernetes },
       { name: "GitHub Actions", Icon: SiGithubactions },
-      { name: "AWS EC2", Icon: Cloud },
+      { name: "AWS Lambda", Icon: Cloud },
       { name: "Locust", Icon: Bug },
       { name: "Pytest", Icon: SiPytest },
       { name: "Git", Icon: SiGit },
-      { name: "Groq LLM", Icon: Cpu },
+      { name: "OpenAI API", Icon: Cpu },
     ],
   },
   {
@@ -108,7 +108,11 @@ export const skillGroups: SkillGroup[] = [
       { name: "CUDA", Icon: SiNvidia },
       { name: "PyTorch", Icon: SiPytorch },
       { name: "LSTM", Icon: Waves },
-      { name: "Model Serving", Icon: Cpu },
+      { name: "LLM Serving", Icon: Cpu },
+      { name: "KV Caching", Icon: Database },
+      { name: "Quantization (INT8/INT4)", Icon: Binary },
+      { name: "LoRA Fine-Tuning", Icon: FlaskConical },
+      { name: "Vector Search (HNSW)", Icon: Network },
       { name: "Model Evaluation", Icon: FlaskConical },
       { name: "MLOps", Icon: Infinity },
       { name: "Drift Monitoring (PSI)", Icon: BarChart3 },

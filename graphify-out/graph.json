@@ -22,8 +22,8 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 6,
-      "community_name": "skills.tsx",
+      "community": 5,
+      "community_name": "page.tsx",
       "file_type": "code",
       "norm_label": "skill",
       "source_file": "src/data/skills.ts",
@@ -35,8 +35,8 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 6,
-      "community_name": "skills.tsx",
+      "community": 5,
+      "community_name": "page.tsx",
       "file_type": "code",
       "norm_label": "skillgroup",
       "source_file": "src/data/skills.ts",
@@ -53,7 +53,7 @@
       "file_type": "code",
       "norm_label": "phasetreeprops",
       "source_file": "src/components/phase-tree.tsx",
-      "source_location": "L16"
+      "source_location": "L17"
     },
     {
       "id": "src_components_phase_tree_treeitem",
@@ -66,7 +66,7 @@
       "file_type": "code",
       "norm_label": "treeitem",
       "source_file": "src/components/phase-tree.tsx",
-      "source_location": "L6"
+      "source_location": "L7"
     },
     {
       "id": "src_components_scroll_deck_phase",
@@ -154,6 +154,18 @@
       "norm_label": "badge()",
       "source_file": "src/components/ui/badge.tsx",
       "source_location": "L30"
+    },
+    {
+      "id": "src_components_ui_button_button",
+      "label": "Button()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "dialog.tsx",
+      "file_type": "code",
+      "norm_label": "button()",
+      "source_file": "src/components/ui/button.tsx",
+      "source_location": "L44"
     },
     {
       "id": "src_components_ui_dialog_dialog",
@@ -360,24 +372,12 @@
       "source_location": "L10"
     },
     {
-      "id": "src_components_ui_button_button",
-      "label": "Button()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "page.tsx",
-      "file_type": "code",
-      "norm_label": "button()",
-      "source_file": "src/components/ui/button.tsx",
-      "source_location": "L44"
-    },
-    {
       "id": "src_components_skills_skills",
       "label": "Skills()",
       "_callable": true,
       "_origin": "ast",
-      "community": 6,
-      "community_name": "skills.tsx",
+      "community": 5,
+      "community_name": "page.tsx",
       "file_type": "code",
       "norm_label": "skills()",
       "source_file": "src/components/skills.tsx",
@@ -468,6 +468,18 @@
       "source_location": "L5"
     },
     {
+      "id": "src_components_phase_tree_itemcard",
+      "label": "ItemCard()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "scroll-deck.tsx",
+      "file_type": "code",
+      "norm_label": "itemcard()",
+      "source_file": "src/components/phase-tree.tsx",
+      "source_location": "L23"
+    },
+    {
       "id": "src_components_phase_tree_phasetree",
       "label": "PhaseTree()",
       "_callable": true,
@@ -477,7 +489,7 @@
       "file_type": "code",
       "norm_label": "phasetree()",
       "source_file": "src/components/phase-tree.tsx",
-      "source_location": "L25"
+      "source_location": "L80"
     },
     {
       "id": "src_components_scroll_deck_phasesection",
@@ -923,17 +935,6 @@
       "source_location": "L29"
     },
     {
-      "id": "tsconfig",
-      "label": "tsconfig.json",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "compilerOptions",
-      "file_type": "code",
-      "norm_label": "tsconfig.json",
-      "source_file": "tsconfig.json",
-      "source_location": "L1"
-    },
-    {
       "id": "tsconfig_compileroptions",
       "label": "compilerOptions",
       "_origin": "ast",
@@ -1110,28 +1111,6 @@
       "source_location": "L3"
     },
     {
-      "id": "tsconfig_exclude",
-      "label": "exclude",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "compilerOptions",
-      "file_type": "code",
-      "norm_label": "exclude",
-      "source_file": "tsconfig.json",
-      "source_location": "L33"
-    },
-    {
-      "id": "tsconfig_include",
-      "label": "include",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "compilerOptions",
-      "file_type": "code",
-      "norm_label": "include",
-      "source_file": "tsconfig.json",
-      "source_location": "L25"
-    },
-    {
       "id": "ref_dom",
       "label": "dom",
       "_origin": "ast",
@@ -1163,83 +1142,6 @@
       "norm_label": "esnext",
       "source_file": "tsconfig.json",
       "source_location": "L4"
-    },
-    {
-      "id": "ref_mts",
-      "label": "**/*.mts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "compilerOptions",
-      "file_type": "concept",
-      "norm_label": "**/*.mts",
-      "source_file": "tsconfig.json",
-      "source_location": "L25"
-    },
-    {
-      "id": "ref_next_dev_types_ts",
-      "label": ".next/dev/types/**/*.ts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "compilerOptions",
-      "file_type": "concept",
-      "norm_label": ".next/dev/types/**/*.ts",
-      "source_file": "tsconfig.json",
-      "source_location": "L25"
-    },
-    {
-      "id": "ref_next_env_d_ts",
-      "label": "next-env.d.ts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "compilerOptions",
-      "file_type": "concept",
-      "norm_label": "next-env.d.ts",
-      "source_file": "tsconfig.json",
-      "source_location": "L25"
-    },
-    {
-      "id": "ref_next_types_ts",
-      "label": ".next/types/**/*.ts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "compilerOptions",
-      "file_type": "concept",
-      "norm_label": ".next/types/**/*.ts",
-      "source_file": "tsconfig.json",
-      "source_location": "L25"
-    },
-    {
-      "id": "ref_node_modules",
-      "label": "node_modules",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "compilerOptions",
-      "file_type": "concept",
-      "norm_label": "node_modules",
-      "source_file": "tsconfig.json",
-      "source_location": "L33"
-    },
-    {
-      "id": "ref_ts",
-      "label": "**/*.ts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "compilerOptions",
-      "file_type": "concept",
-      "norm_label": "**/*.ts",
-      "source_file": "tsconfig.json",
-      "source_location": "L25"
-    },
-    {
-      "id": "ref_tsx",
-      "label": "**/*.tsx",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "compilerOptions",
-      "file_type": "concept",
-      "norm_label": "**/*.tsx",
-      "source_file": "tsconfig.json",
-      "source_location": "L25"
     },
     {
       "id": "eslint_config",
@@ -1332,6 +1234,90 @@
       "source_location": "L3"
     },
     {
+      "id": "readme",
+      "label": "README.md",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "Portfolio \u2014 Ashraf Ahmed",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "readme.md",
+      "source_file": "README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "readme_deployment",
+      "label": "Deployment",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "Portfolio \u2014 Ashraf Ahmed",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "deployment",
+      "source_file": "README.md",
+      "source_location": "L22"
+    },
+    {
+      "id": "readme_local_development",
+      "label": "Local Development",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "Portfolio \u2014 Ashraf Ahmed",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "local development",
+      "source_file": "README.md",
+      "source_location": "L5"
+    },
+    {
+      "id": "readme_portfolio_ashraf_ahmed",
+      "label": "Portfolio \u2014 Ashraf Ahmed",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "Portfolio \u2014 Ashraf Ahmed",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "portfolio \u2014 ashraf ahmed",
+      "source_file": "README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "readme_production_build",
+      "label": "Production Build",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "Portfolio \u2014 Ashraf Ahmed",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "production build",
+      "source_file": "README.md",
+      "source_location": "L14"
+    },
+    {
+      "id": "agents",
+      "label": "AGENTS.md",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "AGENTS.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "agents.md",
+      "source_file": "AGENTS.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "agents_this_is_not_the_next_js_you_know",
+      "label": "This is NOT the Next.js you know",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "AGENTS.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "this is not the next.js you know",
+      "source_file": "AGENTS.md",
+      "source_location": "L2"
+    },
+    {
       "id": "src_components_readme_dialog",
       "label": "readme-dialog.tsx",
       "_origin": "ast",
@@ -1362,6 +1348,28 @@
       "file_type": "code",
       "norm_label": "badgevariants",
       "source_file": "src/components/ui/badge.tsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_components_ui_button",
+      "label": "button.tsx",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "dialog.tsx",
+      "file_type": "code",
+      "norm_label": "button.tsx",
+      "source_file": "src/components/ui/button.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_ui_button_buttonvariants",
+      "label": "buttonVariants",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "dialog.tsx",
+      "file_type": "code",
+      "norm_label": "buttonvariants",
+      "source_file": "src/components/ui/button.tsx",
       "source_location": "L7"
     },
     {
@@ -1926,26 +1934,15 @@
       "source_location": "L1"
     },
     {
-      "id": "src_components_ui_button",
-      "label": "button.tsx",
+      "id": "src_components_skills",
+      "label": "skills.tsx",
       "_origin": "ast",
       "community": 5,
       "community_name": "page.tsx",
       "file_type": "code",
-      "norm_label": "button.tsx",
-      "source_file": "src/components/ui/button.tsx",
+      "norm_label": "skills.tsx",
+      "source_file": "src/components/skills.tsx",
       "source_location": "L1"
-    },
-    {
-      "id": "src_components_ui_button_buttonvariants",
-      "label": "buttonVariants",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "page.tsx",
-      "file_type": "code",
-      "norm_label": "buttonvariants",
-      "source_file": "src/components/ui/button.tsx",
-      "source_location": "L7"
     },
     {
       "id": "src_data_profile",
@@ -1970,22 +1967,11 @@
       "source_location": "L1"
     },
     {
-      "id": "src_components_skills",
-      "label": "skills.tsx",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "skills.tsx",
-      "file_type": "code",
-      "norm_label": "skills.tsx",
-      "source_file": "src/components/skills.tsx",
-      "source_location": "L1"
-    },
-    {
       "id": "src_data_skills",
       "label": "skills.ts",
       "_origin": "ast",
-      "community": 6,
-      "community_name": "skills.tsx",
+      "community": 5,
+      "community_name": "page.tsx",
       "file_type": "code",
       "norm_label": "skills.ts",
       "source_file": "src/data/skills.ts",
@@ -1995,12 +1981,122 @@
       "id": "src_data_skills_skillgroups",
       "label": "skillGroups",
       "_origin": "ast",
-      "community": 6,
-      "community_name": "skills.tsx",
+      "community": 5,
+      "community_name": "page.tsx",
       "file_type": "code",
       "norm_label": "skillgroups",
       "source_file": "src/data/skills.ts",
       "source_location": "L28"
+    },
+    {
+      "id": "tsconfig",
+      "label": "tsconfig.json",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "include",
+      "file_type": "code",
+      "norm_label": "tsconfig.json",
+      "source_file": "tsconfig.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "tsconfig_exclude",
+      "label": "exclude",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "include",
+      "file_type": "code",
+      "norm_label": "exclude",
+      "source_file": "tsconfig.json",
+      "source_location": "L33"
+    },
+    {
+      "id": "tsconfig_include",
+      "label": "include",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "include",
+      "file_type": "code",
+      "norm_label": "include",
+      "source_file": "tsconfig.json",
+      "source_location": "L25"
+    },
+    {
+      "id": "ref_mts",
+      "label": "**/*.mts",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "include",
+      "file_type": "concept",
+      "norm_label": "**/*.mts",
+      "source_file": "tsconfig.json",
+      "source_location": "L25"
+    },
+    {
+      "id": "ref_next_dev_types_ts",
+      "label": ".next/dev/types/**/*.ts",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "include",
+      "file_type": "concept",
+      "norm_label": ".next/dev/types/**/*.ts",
+      "source_file": "tsconfig.json",
+      "source_location": "L25"
+    },
+    {
+      "id": "ref_next_env_d_ts",
+      "label": "next-env.d.ts",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "include",
+      "file_type": "concept",
+      "norm_label": "next-env.d.ts",
+      "source_file": "tsconfig.json",
+      "source_location": "L25"
+    },
+    {
+      "id": "ref_next_types_ts",
+      "label": ".next/types/**/*.ts",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "include",
+      "file_type": "concept",
+      "norm_label": ".next/types/**/*.ts",
+      "source_file": "tsconfig.json",
+      "source_location": "L25"
+    },
+    {
+      "id": "ref_node_modules",
+      "label": "node_modules",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "include",
+      "file_type": "concept",
+      "norm_label": "node_modules",
+      "source_file": "tsconfig.json",
+      "source_location": "L33"
+    },
+    {
+      "id": "ref_ts",
+      "label": "**/*.ts",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "include",
+      "file_type": "concept",
+      "norm_label": "**/*.ts",
+      "source_file": "tsconfig.json",
+      "source_location": "L25"
+    },
+    {
+      "id": "ref_tsx",
+      "label": "**/*.tsx",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "include",
+      "file_type": "concept",
+      "norm_label": "**/*.tsx",
+      "source_file": "tsconfig.json",
+      "source_location": "L25"
     },
     {
       "id": "package",
@@ -3183,7 +3279,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/components/phase-tree.tsx",
-      "source_location": "L3",
+      "source_location": "L4",
       "weight": 1.0
     },
     {
@@ -3195,7 +3291,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/components/phase-tree.tsx",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -3591,7 +3687,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/components/phase-tree.tsx",
-      "source_location": "L3",
+      "source_location": "L4",
       "weight": 1.0
     },
     {
@@ -3603,7 +3699,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/components/phase-tree.tsx",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -3748,6 +3844,17 @@
       "context": "import",
       "source_file": "src/components/ui/dialog.tsx",
       "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "agents",
+      "target": "agents_this_is_not_the_next_js_you_know",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source_location": "L2",
       "weight": 1.0
     },
     {
@@ -4433,6 +4540,50 @@
       "weight": 1.0
     },
     {
+      "source": "readme",
+      "target": "readme_portfolio_ashraf_ahmed",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_portfolio_ashraf_ahmed",
+      "target": "readme_production_build",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_portfolio_ashraf_ahmed",
+      "target": "readme_deployment",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_portfolio_ashraf_ahmed",
+      "target": "readme_local_development",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
       "source": "src_app_layout",
       "target": "src_app_layout_geistmono",
       "relation": "contains",
@@ -4660,18 +4811,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/phase-tree.tsx",
-      "source_location": "L16",
+      "source_location": "L17",
       "weight": 1.0
     },
     {
       "source": "src_components_phase_tree",
-      "target": "src_components_phase_tree_phasetree",
+      "target": "src_components_phase_tree_itemcard",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/phase-tree.tsx",
-      "source_location": "L25",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -4682,7 +4833,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/phase-tree.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_phase_tree",
+      "target": "src_components_phase_tree_phasetree",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/phase-tree.tsx",
+      "source_location": "L80",
       "weight": 1.0
     },
     {
@@ -5292,5 +5454,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "2338efcaf66efa6359557831e8e2b2f9c54ba923"
+  "built_at_commit": "d6c47b619c7e3383de3f75ecd7754f4e77d924e6"
 }
