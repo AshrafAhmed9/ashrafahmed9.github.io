@@ -10,14 +10,14 @@ export const projects: Project[] = [
   {
     title: "Kiln — LLM Inference Engine",
     description:
-      "An LLM inference engine written in C++ with custom CUDA kernels for attention, RMSNorm and RoPE. It serves SmolLM2-135M at 219–231 tokens/s on a GTX 1660 Ti through an OpenAI-compatible API (one request at a time), with final logits within ~6×10⁻⁵ of Hugging Face on two checkpoints. In CPU benchmarks, KV caching sped up generation 11.2× over full recomputation and paged prefix sharing fit 62 concurrent sequences in memory that held 4. An INT8 GEMM path runs 1.60× faster than FP32 on the GPU. 136 tests.",
+      "An LLM inference engine written in C++ with custom CUDA kernels for attention, RMSNorm and RoPE. It serves SmolLM2-135M at 219–231 tokens/s on a GTX 1660 Ti through an OpenAI-compatible API (one request at a time), with final logits within ~6×10⁻⁵ of Hugging Face on two checkpoints. In a CPU benchmark, KV caching sped up generation 11.2× over full recomputation, and a paged KV cache shares common prompt prefixes copy-on-write. In a GPU microbenchmark, INT8 matrix multiplication runs 1.60× faster than FP32. 136 tests.",
     tags: ["C++", "CUDA", "Python", "PyTorch", "LLM Serving", "Quantization"],
     repo: "AshrafAhmed9/kiln",
   },
   {
     title: "Consensa — Distributed Vector Database",
     description:
-      "A distributed vector database in Go: hand-written Raft consensus, an MVCC storage engine, HNSW vector search, range sharding with live splits, and cross-shard transactions across two 3-node replica groups. A chaos harness kills processes and partitions the network, then checks the histories for linearizability. Quorum intersection and range-split ownership are model-checked in TLA+. HNSW search returns 98.6% of the true top-10 matches in 156 µs on 5,000 synthetic vectors.",
+      "A distributed vector database in Go: hand-written Raft consensus, an MVCC storage engine, HNSW vector search, range sharding with live splits, and cross-shard transactions across two 3-node replica groups. A chaos harness kills processes and partitions the network, then checks the histories for linearizability. Quorum intersection and range-key ownership are model-checked in TLA+. Local HNSW search returns 98.6% of the true top-10 matches in 156 µs on 5,000 synthetic vectors.",
     tags: ["Go", "Raft", "HNSW", "gRPC", "TLA+", "Distributed Systems"],
     repo: "AshrafAhmed9/Consensa",
   },
@@ -39,7 +39,7 @@ export const projects: Project[] = [
   {
     title: "ClearText API — Async ML Inference Platform",
     description:
-      "A FastAPI service that takes BERT inference off the request path and onto batched Celery workers. In a 500-user local load test it accepted 169 prediction requests/s at 2 ms median enqueue latency with zero endpoint failures. Model-versioned Redis caching, worker-health backpressure and a replayable dead-letter queue.",
+      "A FastAPI service that takes BERT inference off the request path: the API returns a task ID while batched Celery workers run the model. Repeat inputs are served from a model-versioned Redis cache, requests get a 503 with Retry-After when workers are down or the queue is full, and failed tasks land in a replayable dead-letter queue.",
     tags: ["FastAPI", "Celery", "Redis", "PostgreSQL", "BERT"],
     repo: "AshrafAhmed9/cleartext-api",
   },
