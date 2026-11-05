@@ -7,6 +7,7 @@ export const profile = {
   bio: "Software engineer in Bengaluru working on AI systems and the backends under them. At The Jobs Jungle I build AI features for an applicant-tracking product in Java and Spring Boot: a voice interviewer, a candidate-sourcing pipeline and the cost tracking around our LLM calls. On my own time I build infrastructure from first principles: Kiln, an LLM inference engine in C++ and CUDA, and Consensa, a distributed vector database in Go with hand-written Raft. I also contribute to Zalando Skipper, CNCF etcd and CALL-E.",
   experience: {
     company: "The Jobs Jungle",
+    companyDescription: "AI-native applicant tracking system",
     role: "Associate Software Engineer",
     location: "Bengaluru, India",
     period: "Aug 2026 – Present",
@@ -27,6 +28,14 @@ export const profile = {
   publications: [
     'IEEE ASIACONF 2026 — "Lightweight Radar-Camera Fusion for Real-Time Drone Detection and Trajectory Prediction" (peer-reviewed): confidence-weighted late fusion of YOLOv8n with radar-inspired features lifted precision 0.91 → 0.94 at 8.3 FPS CPU-only inference.',
     'IEEE C2I6 2025 — "Lightweight Real-Time Drone Detection and Trajectory Forecasting Using YOLOv8 and LSTM Networks" (peer-reviewed): mAP 0.89 at ~9 FPS CPU-only inference.',
+  ],
+  awards: [
+    {
+      title: "Global Innovation Build Challenge V2 (2026) — 3rd place (Bronze)",
+      detail:
+        "Medical Tech & Finance track. In a historical backtest on Q3 2022 filings, Marked ranked Silicon Valley Bank #1 of 4,713 US banks for run risk.",
+      url: "https://github.com/AshrafAhmed9/marked",
+    },
   ],
   resumeUrl: "/Ashraf_Ahmed_Software_Engineer.pdf",
   socials: [

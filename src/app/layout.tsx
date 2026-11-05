@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Playfair_Display, IBM_Plex_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { OrbBackground } from "@/components/orb-background";
-import { CornerMarks } from "@/components/corner-marks";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -28,14 +26,16 @@ const ibmPlexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
 });
 
+const title = "K Ashraf Ahmed | AI Systems & Backend Engineer";
+const description =
+  "Software engineer in Bengaluru building AI systems and the backends under them. 12 merged PRs across Zalando Skipper, CNCF etcd and CALL-E; projects include Kiln, an LLM inference engine in C++/CUDA, and Consensa, a distributed vector database in Go.";
+
 export const metadata: Metadata = {
-  title: "K Ashraf Ahmed | Backend & Systems Engineer",
-  description:
-    "Final-year CS student and backend/distributed systems engineer building production-grade distributed applications, high-performance storage engines, and real-time AI inference platforms.",
+  title,
+  description,
   openGraph: {
-    title: "K Ashraf Ahmed | Backend & Systems Engineer",
-    description:
-      "Building distributed systems, storage engines, and AI inference platforms with proven high-concurrency, low-latency performance.",
+    title,
+    description,
     url: "https://ashrafahmed9.github.io",
     siteName: "K Ashraf Ahmed",
     type: "website",
@@ -58,8 +58,6 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <ThemeProvider>
-          <OrbBackground />
-          <CornerMarks />
           {children}
         </ThemeProvider>
       </body>
