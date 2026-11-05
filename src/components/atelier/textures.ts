@@ -111,9 +111,18 @@ export function slabTexture(p: Project, index: number, fonts: Fonts) {
     y += 34;
   }
 
-  ctx.fillStyle = GOLD;
-  ctx.font = `400 20px ${fonts.mono}`;
-  ctx.fillText(p.tags.slice(0, 3).join("  ·  ").toUpperCase(), 58, H - 62);
+  // Footer points at the code: the slab is a link to this repo on GitHub.
+  ctx.strokeStyle = "rgba(217,179,108,0.35)";
+  ctx.beginPath();
+  ctx.moveTo(58, H - 128);
+  ctx.lineTo(W - 58, H - 128);
+  ctx.stroke();
+  ctx.fillStyle = GOLD_LIGHT;
+  ctx.font = `500 22px ${fonts.mono}`;
+  ctx.fillText("VIEW ON GITHUB  ↗", 58, H - 88);
+  ctx.fillStyle = "rgba(244,238,225,0.55)";
+  ctx.font = `400 19px ${fonts.mono}`;
+  ctx.fillText(p.repo.split("/")[1], 58, H - 56);
 
   return toTexture(c);
 }

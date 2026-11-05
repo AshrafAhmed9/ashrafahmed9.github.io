@@ -3,12 +3,13 @@
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import dynamic from "next/dynamic";
 import { FileText } from "lucide-react";
-import { SiGithub } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import { profile } from "@/data/profile";
+import { projects } from "@/data/projects";
+import { contributions } from "@/data/contributions";
 import { LAST, chapters, scrollProgress } from "./journey";
-import { Content, mono } from "./content";
+import { Content, GitHubButton, btnAccent, mono } from "./content";
 import { ReadmePanel } from "./readme-panel";
 import type { Tip } from "./scene";
 
@@ -16,7 +17,6 @@ import type { Tip } from "./scene";
 // as a separate chunk. The text content never waits for it.
 const Scene = dynamic(() => import("./scene"), { ssr: false });
 
-const github = profile.socials.find((s) => s.name === "GitHub");
 const linkedin = profile.socials.find((s) => s.name === "LinkedIn");
 const navItems = chapters.slice(1);
 
@@ -119,15 +119,13 @@ export function Atelier() {
     return () => window.removeEventListener("pointermove", move);
   }, []);
 
-  // Clicking a slab or coin scrolls its full write-up into view.
-  const reveal = useCallback(
-    (id: string) => {
-      document.getElementById(id)?.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "center" });
-    },
-    [reduced],
-  );
-  const onPickProject = useCallback((i: number) => reveal(`project-${i}`), [reveal]);
-  const onPickCoin = useCallback((i: number) => reveal(`pr-${i}`), [reveal]);
+  // 3D objects are links: a slab opens its repo, a coin opens its PR.
+  const onPickProject = useCallback((i: number) => {
+    window.open(`https://github.com/${projects[i].repo}`, "_blank", "noopener,noreferrer");
+  }, []);
+  const onPickCoin = useCallback((i: number) => {
+    window.open(contributions[i].url, "_blank", "noopener,noreferrer");
+  }, []);
   const closeReadme = useCallback(() => setReadme(null), []);
   const onSceneReady = useCallback(() => setSceneReady(true), []);
 
@@ -228,27 +226,19 @@ function TopBar({ current }: { current: number }) {
             ))}
           </ul>
         </nav>
-        <div className="flex items-center gap-4">
-          {github && (
-            <a href={github.url} target="_blank" rel="noopener noreferrer" className="text-[#f4eee1]/75 hover:text-[#d9b36c]">
-              <span className="sr-only">GitHub</span>
-              <SiGithub className="size-5" />
-            </a>
-          )}
+        <div className="flex items-center gap-3 sm:gap-4">
+          {/* Phones show icons only for these two so all three fit in the bar. */}
           {linkedin && (
-            <a href={linkedin.url} target="_blank" rel="noopener noreferrer" className="text-[#f4eee1]/75 hover:text-[#d9b36c]">
-              <span className="sr-only">LinkedIn</span>
-              <FaLinkedin className="size-5" />
+            <a href={linkedin.url} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className={cn(btnAccent, "px-2.5 py-1.5 text-sm sm:px-3.5")}>
+              <FaLinkedin className="size-4" />
+              <span className="max-sm:hidden">LinkedIn</span>
             </a>
           )}
-          <a
-            href={profile.resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full bg-[#d9b36c] px-4 py-1.5 text-sm font-medium text-[#050507] hover:bg-[#f1dba8]"
-          >
-            <FileText className="size-4" /> Resume
+          <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer" aria-label="Resume" className={cn(btnAccent, "px-2.5 py-1.5 text-sm sm:px-3.5")}>
+            <FileText className="size-4" />
+            <span className="max-sm:hidden">Resume</span>
           </a>
+          <GitHubButton size="sm" label="GitHub" />
         </div>
       </div>
       {/* Below lg the section links become a swipeable strip. */}

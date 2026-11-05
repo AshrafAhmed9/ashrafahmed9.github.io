@@ -3,7 +3,8 @@ export const profile = {
   email: "ashrafahmed1232@gmail.com",
   tagline: "AI Systems & Backend Engineer.",
   credibility: "12 merged PRs across 8 open-source repositories, including Zalando Skipper, CNCF etcd and CALL-E.",
-  availability: "Associate Software Engineer @ The Jobs Jungle · Bengaluru, India · open to AI engineering, forward deployed and AI infrastructure roles",
+  openTo: "AI engineering, forward deployed and AI infrastructure roles",
+  availability:"Associate Software Engineer @ The Jobs Jungle · Bengaluru, India · open to AI engineering, forward deployed and AI infrastructure roles",
   bio: "Software engineer in Bengaluru working on AI systems and the backends under them. At The Jobs Jungle I build AI features for an applicant-tracking product in Java and Spring Boot: a voice interviewer, a candidate-sourcing pipeline and the cost tracking around our LLM calls. On my own time I build infrastructure from first principles: Kiln, an LLM inference engine in C++ and CUDA, and Consensa, a distributed vector database in Go with hand-written Raft. I also contribute to Zalando Skipper, CNCF etcd and CALL-E.",
   experience: {
     company: "The Jobs Jungle",

@@ -190,55 +190,170 @@ function Stage({ compact }: { compact: boolean }) {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 0  Intro: the gem                                                           */
+/* 0  Intro: a neural network running a forward pass                           */
 /* -------------------------------------------------------------------------- */
 
-function Gem({ reduced }: { reduced: boolean }) {
-  const core = useRef<THREE.Group>(null);
-  const ringA = useRef<THREE.Mesh>(null);
-  const ringB = useRef<THREE.Mesh>(null);
-  const cage = useRef<THREE.Mesh>(null);
+// Layer widths, input to output. Each layer is a ring of nodes in the YZ plane.
+const LAYERS = [4, 8, 10, 8, 4];
+const LAYER_GAP = 1.25;
+const PULSES = 30;
+
+// Built once at module load: fixed node positions and every layer-to-layer edge.
+const NET = (() => {
+  const nodes: THREE.Vector3[] = [];
+  const layerStart: number[] = [];
+  LAYERS.forEach((n, l) => {
+    layerStart.push(nodes.length);
+    const x = (l - (LAYERS.length - 1) / 2) * LAYER_GAP;
+    const r = 0.45 + n * 0.17;
+    for (let k = 0; k < n; k++) {
+      const a = (k / n) * Math.PI * 2 + l * 0.4;
+      nodes.push(new THREE.Vector3(x, Math.cos(a) * r, Math.sin(a) * r));
+    }
+  });
+  const edges: number[] = [];
+  for (let l = 0; l < LAYERS.length - 1; l++) {
+    for (let i = 0; i < LAYERS[l]; i++) {
+      for (let j = 0; j < LAYERS[l + 1]; j++) {
+        const a = nodes[layerStart[l] + i];
+        const b = nodes[layerStart[l + 1] + j];
+        edges.push(a.x, a.y, a.z, b.x, b.y, b.z);
+      }
+    }
+  }
+  return { nodes, layerStart, edges: new Float32Array(edges) };
+})();
+
+const randomNode = (layer: number) =>
+  NET.layerStart[layer] + Math.floor(Math.random() * LAYERS[layer]);
+
+interface Pulse {
+  layer: number; // layer of the node the pulse is travelling *from*
+  from: number;
+  to: number;
+  t: number;
+  speed: number;
+}
+
+function NeuralNet({ reduced }: { reduced: boolean }) {
+  const group = useRef<THREE.Group>(null);
+  const nodesMesh = useRef<THREE.InstancedMesh>(null);
+  const pulsePoints = useRef<THREE.Points>(null);
+  const pulses = useRef<Pulse[]>([]);
+  const heat = useRef(new Float32Array(NET.nodes.length));
+  const [pulseBuffer] = useState(() => new Float32Array(PULSES * 3));
+  const color = useRef(new THREE.Color());
+  const dot = useMemo(() => glowTexture(), []);
+  useEffect(() => () => dot.dispose(), [dot]);
+
+  const base = useMemo(() => glow(GOLD, 0.9), []);
+  const hot = useMemo(() => glow(GOLD_LIGHT, 3.4), []);
+
+  useEffect(() => {
+    const m = nodesMesh.current;
+    if (!m) return;
+    const d = new THREE.Object3D();
+    NET.nodes.forEach((p, i) => {
+      d.position.copy(p);
+      d.updateMatrix();
+      m.setMatrixAt(i, d.matrix);
+      m.setColorAt(i, base);
+    });
+    m.instanceMatrix.needsUpdate = true;
+    if (m.instanceColor) m.instanceColor.needsUpdate = true;
+  }, [base]);
 
   useFrame((state, dt) => {
-    if (reduced) return;
-    const s = state.clock.elapsedTime;
-    if (core.current) {
-      core.current.rotation.y += dt * 0.18;
-      core.current.rotation.x = Math.sin(s * 0.4) * 0.12;
-      core.current.position.y = Math.sin(s * 0.7) * 0.12;
+    const g = group.current;
+    if (g && !reduced) {
+      g.rotation.x += dt * 0.12;
+      g.position.y = Math.sin(state.clock.elapsedTime * 0.6) * 0.1;
     }
-    if (ringA.current) ringA.current.rotation.z += dt * 0.25;
-    if (ringB.current) ringB.current.rotation.x += dt * 0.18;
-    if (cage.current) cage.current.rotation.y -= dt * 0.08;
+
+    // Spawn lazily, staggered along the network so it never starts empty.
+    if (pulses.current.length === 0) {
+      for (let i = 0; i < PULSES; i++) {
+        const layer = i % (LAYERS.length - 1);
+        pulses.current.push({
+          layer,
+          from: randomNode(layer),
+          to: randomNode(layer + 1),
+          t: Math.random(),
+          speed: 0.7 + Math.random() * 0.6,
+        });
+      }
+    }
+
+    // Each pulse hops one layer at a time, lighting up the node it lands on,
+    // and restarts at the input layer after reaching the output: a forward pass.
+    const step = reduced ? 0 : dt;
+    const attr = pulsePoints.current?.geometry.attributes.position;
+    const out = attr?.array as Float32Array | undefined;
+    pulses.current.forEach((p, i) => {
+      p.t += step * p.speed;
+      if (p.t >= 1) {
+        heat.current[p.to] = 1;
+        const next = p.layer + 1;
+        if (next >= LAYERS.length - 1) {
+          p.layer = 0;
+          p.from = randomNode(0);
+        } else {
+          p.layer = next;
+          p.from = p.to;
+        }
+        p.to = randomNode(p.layer + 1);
+        p.t = 0;
+      }
+      const a = NET.nodes[p.from];
+      const b = NET.nodes[p.to];
+      if (!out) return;
+      out[i * 3] = a.x + (b.x - a.x) * p.t;
+      out[i * 3 + 1] = a.y + (b.y - a.y) * p.t;
+      out[i * 3 + 2] = a.z + (b.z - a.z) * p.t;
+    });
+    if (attr) attr.needsUpdate = true;
+
+    const m = nodesMesh.current;
+    if (m) {
+      for (let i = 0; i < heat.current.length; i++) {
+        heat.current[i] = Math.max(0, heat.current[i] - dt * 1.6);
+        m.setColorAt(i, color.current.copy(base).lerp(hot, heat.current[i]));
+      }
+      if (m.instanceColor) m.instanceColor.needsUpdate = true;
+    }
   });
 
   return (
-    <group position={[AXIS_X, 0, stationZ(0)]}>
-      <group ref={core}>
-        <mesh>
-          <icosahedronGeometry args={[1.55, 1]} />
-          <meshPhysicalMaterial
-            color="#070709"
-            metalness={1}
-            roughness={0.1}
-            flatShading
-            clearcoat={1}
-            envMapIntensity={1.8}
+    <group position={[AXIS_X, 0.1, stationZ(0)]}>
+      <group ref={group}>
+        <lineSegments>
+          <bufferGeometry>
+            <bufferAttribute attach="attributes-position" args={[NET.edges, 3]} />
+          </bufferGeometry>
+          <lineBasicMaterial color={GOLD} transparent opacity={0.12} depthWrite={false} />
+        </lineSegments>
+        <instancedMesh ref={nodesMesh} args={[undefined, undefined, NET.nodes.length]}>
+          <sphereGeometry args={[0.075, 16, 16]} />
+          <meshBasicMaterial toneMapped={false} />
+        </instancedMesh>
+        <points ref={pulsePoints}>
+          <bufferGeometry>
+            <bufferAttribute attach="attributes-position" args={[pulseBuffer, 3]} />
+          </bufferGeometry>
+          <pointsMaterial
+            map={dot}
+            color={glow(GOLD_LIGHT, 3)}
+            size={0.42}
+            transparent
+            depthWrite={false}
+            blending={THREE.AdditiveBlending}
+            toneMapped={false}
           />
-          <Edges threshold={1} color={glow(GOLD, 1.8)} />
-        </mesh>
-        <mesh ref={cage} scale={1.55}>
-          <icosahedronGeometry args={[1.55, 0]} />
-          <meshBasicMaterial color={GOLD} wireframe transparent opacity={0.28} toneMapped={false} />
-        </mesh>
+        </points>
       </group>
-      <mesh ref={ringA} rotation={[Math.PI / 2.4, 0.2, 0]}>
-        <torusGeometry args={[2.75, 0.014, 12, 220]} />
-        <meshBasicMaterial color={glow(GOLD_LIGHT, 2)} toneMapped={false} />
-      </mesh>
-      <mesh ref={ringB} rotation={[0.3, 0, Math.PI / 3]}>
-        <torusGeometry args={[3.25, 0.01, 12, 260]} />
-        <meshBasicMaterial color={glow(GOLD, 1.6)} toneMapped={false} />
+      <mesh rotation={[Math.PI / 2.3, 0.25, 0]}>
+        <torusGeometry args={[3.7, 0.01, 12, 260]} />
+        <meshBasicMaterial color={glow(GOLD, 1.5)} toneMapped={false} />
       </mesh>
     </group>
   );
@@ -294,7 +409,7 @@ function Coin({
           e.stopPropagation();
           setHovered(true);
           onHover(index);
-          setTip({ title: c.title, sub: `${c.repo} · PR #${c.pr}` });
+          setTip({ title: c.title, sub: `${c.repo} #${c.pr} · open on GitHub` });
         }}
         onPointerOut={() => {
           setHovered(false);
@@ -505,6 +620,7 @@ function Slab({
   reduced,
   onHover,
   onPick,
+  setTip,
 }: {
   index: number;
   position: [number, number, number];
@@ -513,6 +629,7 @@ function Slab({
   reduced: boolean;
   onHover: (i: number | null) => void;
   onPick: (i: number) => void;
+  setTip: (t: Tip | null) => void;
 }) {
   const group = useRef<THREE.Group>(null);
   const face = useRef<THREE.MeshStandardMaterial>(null);
@@ -538,10 +655,12 @@ function Slab({
           e.stopPropagation();
           setHovered(true);
           onHover(index);
+          setTip({ title: "Open on GitHub", sub: projects[index].repo });
         }}
         onPointerOut={() => {
           setHovered(false);
           onHover(null);
+          setTip(null);
         }}
         onClick={(e) => {
           e.stopPropagation();
@@ -573,11 +692,13 @@ function SlabWall({
   focus,
   setHover,
   onPick,
+  setTip,
 }: {
   reduced: boolean;
   focus: number | null;
   setHover: (i: number | null) => void;
   onPick: (i: number) => void;
+  setTip: (t: Tip | null) => void;
 }) {
   const fonts = useFonts();
   const textures = useMemo(
@@ -617,6 +738,7 @@ function SlabWall({
           reduced={reduced}
           onHover={setHover}
           onPick={onPick}
+          setTip={setTip}
         />
       ))}
     </>
@@ -802,6 +924,8 @@ function Radar({ reduced }: { reduced: boolean }) {
   const tmp = useMemo(() => new THREE.Vector3(), []);
   const positions = useMemo(() => new Float32Array(DRONES.length * FORECAST * 3), []);
   const time = useRef(8);
+  const dot = useMemo(() => glowTexture(), []);
+  useEffect(() => () => dot.dispose(), [dot]);
 
   useFrame((_, dt) => {
     time.current += reduced ? 0 : dt;
@@ -869,7 +993,15 @@ function Radar({ reduced }: { reduced: boolean }) {
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" args={[positions, 3]} />
         </bufferGeometry>
-        <pointsMaterial color={glow(GOLD, 1.5)} size={0.05} transparent opacity={0.85} toneMapped={false} />
+        <pointsMaterial
+          map={dot}
+          color={glow(GOLD, 2)}
+          size={0.22}
+          transparent
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+          toneMapped={false}
+        />
       </points>
       {/* The camera half of radar-camera fusion: a sensor frustum aimed inward. */}
       <mesh position={[3.7, 0, 0.6]} rotation-z={-Math.PI / 2}>
@@ -881,25 +1013,37 @@ function Radar({ reduced }: { reduced: boolean }) {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 6  Contact: the gate                                                        */
+/* 6  Contact: a beacon sending out signal rings                               */
 /* -------------------------------------------------------------------------- */
 
-function Gate({ reduced }: { reduced: boolean }) {
-  const rings = useRef<THREE.Group>(null);
+const RIPPLES = 4;
+
+function Beacon({ reduced }: { reduced: boolean }) {
+  const core = useRef<THREE.Group>(null);
+  const rings = useRef<(THREE.Mesh | null)[]>([]);
+  const time = useRef(0);
   const glowTex = useMemo(() => glowTexture(), []);
   useEffect(() => () => glowTex.dispose(), [glowTex]);
 
-  useFrame((state, dt) => {
-    if (reduced || !rings.current) return;
-    rings.current.children.forEach((c, i) => {
-      c.rotation.z += dt * (0.15 + i * 0.08) * (i % 2 ? -1 : 1);
+  useFrame((_, dt) => {
+    time.current += reduced ? 0 : dt;
+    const t = time.current;
+    if (core.current) {
+      core.current.rotation.y = t * 0.6;
+      core.current.position.y = Math.sin(t * 1.2) * 0.08;
+    }
+    // Rings are born small at the core, grow outward and fade, on a loop.
+    rings.current.forEach((m, i) => {
+      if (!m) return;
+      const phase = reduced ? (i + 0.5) / RIPPLES : (t * 0.28 + i / RIPPLES) % 1;
+      m.scale.setScalar(0.35 + phase * 3.1);
+      (m.material as THREE.MeshBasicMaterial).opacity = Math.sin(phase * Math.PI) * (1 - phase * 0.4);
     });
-    rings.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.15;
   });
 
   return (
     <group position={[AXIS_X, 0, stationZ(6)]}>
-      <mesh position={[0, 0, -0.3]}>
+      <mesh position={[0, 0, -0.4]}>
         <planeGeometry args={[11, 11]} />
         <meshBasicMaterial
           map={glowTex}
@@ -909,20 +1053,46 @@ function Gate({ reduced }: { reduced: boolean }) {
           toneMapped={false}
         />
       </mesh>
-      <group ref={rings}>
-        <mesh>
-          <torusGeometry args={[2.7, 0.1, 24, 200]} />
-          <meshStandardMaterial color="#c9a15a" metalness={1} roughness={0.18} emissive={GOLD} emissiveIntensity={0.25} />
+
+      {Array.from({ length: RIPPLES }, (_, i) => (
+        <mesh key={i} ref={(m) => { rings.current[i] = m; }}>
+          <torusGeometry args={[1, 0.012, 8, 160]} />
+          <meshBasicMaterial
+            color={glow(GOLD_LIGHT, 2)}
+            transparent
+            opacity={0}
+            depthWrite={false}
+            toneMapped={false}
+          />
         </mesh>
+      ))}
+
+      <group ref={core}>
         <mesh>
-          <torusGeometry args={[2.2, 0.012, 8, 200]} />
-          <meshBasicMaterial color={glow(GOLD_LIGHT, 2)} toneMapped={false} />
+          <octahedronGeometry args={[0.5, 0]} />
+          <meshBasicMaterial color={glow(GOLD_LIGHT, 2.6)} toneMapped={false} />
         </mesh>
-        <mesh>
-          <torusGeometry args={[1.7, 0.008, 8, 200]} />
-          <meshBasicMaterial color={glow(GOLD, 1.6)} toneMapped={false} />
+        <mesh scale={1.7}>
+          <octahedronGeometry args={[0.5, 0]} />
+          <meshBasicMaterial color={GOLD} wireframe transparent opacity={0.45} toneMapped={false} />
         </mesh>
       </group>
+
+      {/* Mast: a thin light beam from the pedestal up to the core. */}
+      <mesh position={[0, -1.3, 0]}>
+        <cylinderGeometry args={[0.015, 0.015, 1.6, 8]} />
+        <meshBasicMaterial color={glow(GOLD, 1.8)} toneMapped={false} />
+      </mesh>
+      <mesh position={[0, -2.25, 0]}>
+        <cylinderGeometry args={[1.1, 1.4, 0.35, 48]} />
+        <meshPhysicalMaterial color="#08080a" metalness={1} roughness={0.18} clearcoat={1} />
+        <Edges threshold={30} color={glow(GOLD, 1.5)} />
+      </mesh>
+
+      <mesh>
+        <torusGeometry args={[3.7, 0.008, 8, 220]} />
+        <meshBasicMaterial color={glow(GOLD, 1.3)} toneMapped={false} />
+      </mesh>
     </group>
   );
 }
@@ -961,7 +1131,7 @@ export default function Scene(props: SceneProps) {
       <CameraRig progressRef={props.progress} camTRef={camTRef} reduced={props.reduced} lightRef={light} />
       <Stage compact={props.compact} />
 
-      <Gem reduced={props.reduced} />
+      <NeuralNet reduced={props.reduced} />
       <CoinRing
         reduced={props.reduced}
         focus={props.coin}
@@ -975,10 +1145,11 @@ export default function Scene(props: SceneProps) {
         focus={props.project}
         setHover={props.setHoverProject}
         onPick={props.onPickProject}
+        setTip={props.setTip}
       />
       <SkillOrbits active={props.category} reduced={props.reduced} setTip={props.setTip} />
       <Radar reduced={props.reduced} />
-      <Gate reduced={props.reduced} />
+      <Beacon reduced={props.reduced} />
 
       <EffectComposer multisampling={props.compact ? 0 : 4}>
         <Bloom mipmapBlur intensity={0.9} luminanceThreshold={0.9} luminanceSmoothing={0.2} />

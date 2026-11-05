@@ -26,6 +26,47 @@ const workStats = [
 
 const github = profile.socials.find((s) => s.name === "GitHub");
 const linkedin = profile.socials.find((s) => s.name === "LinkedIn");
+export const githubUrl = github?.url ?? "https://github.com/AshrafAhmed9";
+const githubHandle = githubUrl.replace(/^https:\/\//, "");
+
+/**
+ * The site's primary call to action: every project's code lives on GitHub,
+ * so this is the one button that glows and carries a light sweep.
+ */
+export function GitHubButton({
+  size = "lg",
+  label = "View my GitHub",
+  href = githubUrl,
+  className,
+}: {
+  size?: "lg" | "md" | "sm";
+  label?: string;
+  href?: string;
+  className?: string;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn(
+        "relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-[#f1dba8] bg-[#d9b36c] font-semibold text-[#050507] shadow-[0_0_28px_-4px_rgba(217,179,108,0.7)] transition-[background-color,box-shadow] hover:bg-[#f1dba8] hover:shadow-[0_0_44px_-2px_rgba(241,219,168,0.9)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f1dba8]",
+        size === "lg" && "px-7 py-3.5 text-[17px]",
+        size === "md" && "px-4 py-2 text-sm",
+        size === "sm" && "px-4 py-1.5 text-sm",
+        className,
+      )}
+    >
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 left-0 w-1/3 animate-[sheen_4.5s_ease-in-out_infinite] bg-gradient-to-r from-transparent via-white/55 to-transparent motion-reduce:hidden"
+      />
+      <SiGithub className={size === "lg" ? "size-5" : "size-4"} />
+      {label}
+      {size !== "sm" && <ArrowUpRight className="size-4" />}
+    </a>
+  );
+}
 
 /* ------------------------------- primitives ------------------------------- */
 
@@ -105,6 +146,9 @@ const btnBase =
   "inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[15px] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f1dba8]";
 const btnGold = `${btnBase} border border-[#d9b36c] bg-[#d9b36c] text-[#050507] hover:bg-[#f1dba8]`;
 const btnGhost = `${btnBase} border border-[#d9b36c]/45 text-[#f4eee1] hover:border-[#d9b36c] hover:text-[#d9b36c]`;
+// Second tier, for Résumé and LinkedIn: gold outline and soft glow, but no
+// fill or light sweep, so GitHub stays the strongest call to action.
+export const btnAccent = `${btnBase} border border-[#d9b36c] bg-[#d9b36c]/10 text-[#f1dba8] shadow-[0_0_18px_-6px_rgba(217,179,108,0.6)] hover:bg-[#d9b36c]/20 hover:text-[#fff3d6]`;
 
 function ExtLink({ href, className, children }: { href: string; className: string; children: ReactNode }) {
   return (
@@ -145,26 +189,25 @@ export function Content(p: ContentProps) {
         <p className="mt-6 text-xl leading-relaxed text-[#f4eee1]">{profile.credibility}</p>
         <p className="mt-3 text-base leading-relaxed text-[#f4eee1]/70">{profile.availability}</p>
 
-        <div className="mt-8 flex flex-wrap gap-3">
-          <a href="#work" className={btnGold}>View Work</a>
-          <a href={`mailto:${profile.email}`} className={btnGhost}>
-            <Mail className="size-4" /> Get in Touch
-          </a>
+        <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+          <GitHubButton />
+          <p className={cn(mono, "text-xs uppercase tracking-[0.18em] text-[#f4eee1]/55")}>
+            Source code for every project
+          </p>
         </div>
-        <div className="mt-3 flex flex-wrap gap-3">
-          {github && (
-            <ExtLink href={github.url} className={btnGhost}>
-              <SiGithub className="size-4" /> GitHub
-            </ExtLink>
-          )}
+        <div className="mt-4 flex flex-wrap gap-3">
+          <ExtLink href={profile.resumeUrl} className={btnAccent}>
+            <FileText className="size-4" /> Resume
+          </ExtLink>
           {linkedin && (
-            <ExtLink href={linkedin.url} className={btnGhost}>
+            <ExtLink href={linkedin.url} className={btnAccent}>
               <FaLinkedin className="size-4" /> LinkedIn
             </ExtLink>
           )}
-          <ExtLink href={profile.resumeUrl} className={btnGhost}>
-            <FileText className="size-4" /> Resume
-          </ExtLink>
+          <a href="#work" className={btnGhost}>View Work</a>
+          <a href={`mailto:${profile.email}`} className={btnGhost}>
+            <Mail className="size-4" /> Get in Touch
+          </a>
         </div>
 
         {/* For a recruiter skimming: the essentials without scrolling. */}
@@ -173,13 +216,19 @@ export function Content(p: ContentProps) {
             { k: "Current role", v: `${xp.role}, ${xp.company} · ${xp.period}` },
             { k: "Education", v: `${edu.degree}, ${edu.institution} · ${edu.period}` },
             { k: "Publications & awards", v: "2 peer-reviewed IEEE papers · 3rd place, Global Innovation Build Challenge V2" },
+            { k: "GitHub", v: githubHandle, href: githubUrl, external: true },
             { k: "Email", v: profile.email, href: `mailto:${profile.email}` },
+            { k: "Open to", v: `${profile.openTo} · ${xp.location}` },
           ].map((row) => (
             <div key={row.k} className="bg-[#0a0a0d]/90 p-4 backdrop-blur-md">
               <dt className={cn(mono, "text-[11px] uppercase tracking-[0.22em] text-[#d9b36c]")}>{row.k}</dt>
               <dd className="mt-1.5 text-[15px] leading-snug text-[#f4eee1]/90">
                 {row.href ? (
-                  <a href={row.href} className="underline decoration-[#d9b36c]/50 underline-offset-4 hover:text-[#d9b36c]">
+                  <a
+                    href={row.href}
+                    {...(row.external && { target: "_blank", rel: "noopener noreferrer" })}
+                    className="underline decoration-[#d9b36c]/50 underline-offset-4 hover:text-[#d9b36c]"
+                  >
                     {row.v}
                   </a>
                 ) : (
@@ -217,7 +266,7 @@ export function Content(p: ContentProps) {
                 </p>
                 <p className="mt-3 text-base leading-relaxed text-[#f4eee1]/80">{c.description}</p>
                 <ExtLink href={c.url} className={cn(btnGhost, "mt-4 px-4 py-2 text-sm")}>
-                  View PR <ArrowUpRight className="size-4" />
+                  <SiGithub className="size-4" /> View PR <ArrowUpRight className="size-4" />
                 </ExtLink>
               </Card>
             ))}
@@ -259,7 +308,13 @@ export function Content(p: ContentProps) {
 
         {/* ------------------------------ Projects ----------------------------- */}
         <Section id="projects" index={3}>
-          <Heading n="03" label="Personal Projects" title="Selected work." />
+          <Heading
+            n="03"
+            label="Personal Projects"
+            title="Selected work."
+            lede="Every project below is open source, with its code and README on GitHub."
+          />
+          <GitHubButton size="md" label="Browse all repositories" className="mb-8" />
           <div className="space-y-4">
             {projects.map((pr, i) => (
               <Card
@@ -278,9 +333,7 @@ export function Content(p: ContentProps) {
                   {pr.tags.map((t) => <Chip key={t}>{t}</Chip>)}
                 </ul>
                 <div className="mt-5 flex flex-wrap gap-2.5">
-                  <ExtLink href={`https://github.com/${pr.repo}`} className={cn(btnGhost, "px-4 py-2 text-sm")}>
-                    <SiGithub className="size-4" /> Repository
-                  </ExtLink>
+                  <GitHubButton size="md" label="View on GitHub" href={`https://github.com/${pr.repo}`} />
                   {pr.liveUrl && (
                     <ExtLink href={pr.liveUrl} className={cn(btnGhost, "px-4 py-2 text-sm")}>
                       <ExternalLink className="size-4" /> Live
@@ -404,17 +457,13 @@ export function Content(p: ContentProps) {
             <a href={`mailto:${profile.email}`} className={btnGold}>
               <Mail className="size-4" /> Email Me
             </a>
-            {github && (
-              <ExtLink href={github.url} className={btnGhost}>
-                <SiGithub className="size-4" /> GitHub
-              </ExtLink>
-            )}
+            <GitHubButton size="md" label="GitHub" />
             {linkedin && (
-              <ExtLink href={linkedin.url} className={btnGhost}>
+              <ExtLink href={linkedin.url} className={btnAccent}>
                 <FaLinkedin className="size-4" /> LinkedIn
               </ExtLink>
             )}
-            <ExtLink href={profile.resumeUrl} className={btnGhost}>
+            <ExtLink href={profile.resumeUrl} className={btnAccent}>
               <FileText className="size-4" /> Resume
             </ExtLink>
           </div>

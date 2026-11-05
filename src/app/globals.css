@@ -185,3 +185,9 @@
   background-color: oklch(0.632 0.254 21.8 / 80%);
 }
 
+
+/* Light sweep across the GitHub call-to-action. */
+@keyframes sheen {
+  0%, 55% { transform: translateX(-120%) skewX(-20deg); }
+  100% { transform: translateX(220%) skewX(-20deg); }
+}
